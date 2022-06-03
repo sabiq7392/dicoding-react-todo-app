@@ -8,6 +8,6 @@ import { ReactNode, ReactElement } from "react";
  *    </LayoutMain> 
  *  </If>
  */
-export default function If({ is, children }: { is: any, children: ReactNode }): ReactElement {
+export default function If({ is, children }: { is: any, children: ReactNode[] | ReactNode }): ReactElement {
   return is && <>{children}</>;
 }

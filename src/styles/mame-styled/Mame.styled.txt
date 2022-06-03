@@ -15,4 +15,6 @@ WHAT IS MAME STYLED?
   JavaScript Library where is focusing to build UI, You can write 
   CSS like pseudo selector, Media Queries, etc in inline css style. 
   Also there are components
+  
+  Mame Styled based by Styled Components
 

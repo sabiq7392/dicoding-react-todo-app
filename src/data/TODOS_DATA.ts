@@ -1,12 +1,4 @@
-export interface TodosData {
-  id: string;
-  title: string;
-  body: string;
-  archived: boolean;
-  createdAt: string;
-  updatedAt?: string;
-  deletedAt?: string;
-}
+import type { TodosData } from "../types";
 
 const TODOS_DATA: TodosData[] = [];
 

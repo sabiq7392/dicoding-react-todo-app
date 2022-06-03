@@ -1,6 +1,5 @@
 import type { ReactElement, FormEvent } from "react";
-import type { TodosData } from "../data/TODOS_DATA";
-import type { SetTodoData } from "../types";
+import type { SetTodoData, TodosData } from "../types";
 import { useState } from "react";
 import { Form, Button, Input } from "../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type { TodosData } from "../data/TODOS_DATA";
+import type { TodosData } from "../types";
 import { default as __RenderIf } from "../styles/mame-styled/core/utils/js-syntax/If";
 import { P } from "../styles/mame-styled/core/HtmlTag";
 

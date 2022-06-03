@@ -1,7 +1,6 @@
 import type { ReactElement } from "react";
-import type { TodosData }from "../data/TODOS_DATA";
 import { Section, H2, P, Small, Button } from "../styles/mame-styled/core/HtmlTag";
-import type { SetTodoData } from "../types";
+import type { SetTodoData, TodosData } from "../types";
 
 interface Props extends TodosData {
   SET_TODO_DATA: SetTodoData;

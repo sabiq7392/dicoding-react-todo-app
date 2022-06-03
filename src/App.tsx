@@ -2,7 +2,7 @@ import GlobalsStyles from "./styles/Globals.styled";
 import { Article, Aside, Button, Div, Footer, Form, H1, H2, Header, Input, Main, P, Section, Small } from "./styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "./styles/styles.config";
-import { ReactElement, useId, useRef, useState } from "react";
+import { FormEvent, ReactElement, useId, useRef, useState } from "react";
 import TODOS_DATA, { TodosData } from "./data/TODOS_DATA";
 import { default as __RenderIf } from "./styles/mame-styled/core/utils/js-syntax/If";
 import { default as __Map } from "./styles/mame-styled/core/utils/js-syntax/Map";
@@ -19,7 +19,7 @@ function App(): ReactElement {
   const [SEARCH_TODO_DATA, SET_SEARCH_TODO_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
-  const addTodo = (e: any) => {
+  const addTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     SET_TODO_DATA(TODOS_DATA.push({
@@ -32,14 +32,7 @@ function App(): ReactElement {
 
     console.log(TODOS_DATA);
     console.log({ message: "successfully added todo" });
-  };
-
-  const deleteTodo = (id: string) => {
-    const indexOfTodo = TODOS_DATA.findIndex(todo => todo.id === id);
-    SET_TODO_DATA(TODOS_DATA.splice(indexOfTodo, 1));
-
-    console.log(TODOS_DATA);
-    console.log({ message: "successfully deleted todo" });
+    
   };
 
   const searchTodo = () => {
@@ -49,7 +42,7 @@ function App(): ReactElement {
 
     setSearchTodoInputValue(searchValue);
     SET_SEARCH_TODO_DATA(findByTitle as []);
-    console.log(searchValue === "" ? "nothing to look for" : findByTitle);
+    // console.log(searchValue === "" ? "nothing to look for" : findByTitle);
   };
 
   return (

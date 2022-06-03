@@ -1,87 +1,63 @@
+import type { ReactElement } from "react";
+import { useState } from "react";
 import GlobalsStyles from "./styles/Globals.styled";
 import { Article, Aside, Button, Div, Footer, Form, H1, H2, Header, Input, Main, P, Section, Small } from "./styles/mame-styled/core/HtmlTag";
-import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "./styles/styles.config";
-import { FormEvent, ReactElement, useId, useRef, useState } from "react";
-import TODOS_DATA, { TodosData } from "./data/TODOS_DATA";
+import TODOS_DATA from "./data/TODOS_DATA";
 import { default as __RenderIf } from "./styles/mame-styled/core/utils/js-syntax/If";
 import { default as __Map } from "./styles/mame-styled/core/utils/js-syntax/Map";
+import FormAddToDo from "./components/FormAddToDo";
+import AllTodoList from "./components/AllTodosList";
+import SearchedTodosList from "./components/SearchedTodosList";
+import MessageTodosNotShow from "./components/MessageTodosNotShow";
+import Date from "./components/Date";
+import Title from "./components/Title";
+import SearchbarTodos from "./components/SearchbarTodos";
 
-const { spacing, color } = STYLES_CONFIG;
+const { color } = STYLES_CONFIG;
 
 function App(): ReactElement {
-  const form = useRef<HTMLFormElement>();
-  const title = useRef<HTMLInputElement>();
-  const body = useRef<HTMLInputElement>();
-  const search = useRef<HTMLInputElement>();
-  const todosContainer = useRef<HTMLDivElement>();
   const [TODO_DATA, SET_TODO_DATA] = useState({});
-  const [SEARCH_TODO_DATA, SET_SEARCH_TODO_DATA] = useState([]);
+  const [SEARCH_TODOS_DATA, SET_SEARCH_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
-
-  const addTodo = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    SET_TODO_DATA(TODOS_DATA.push({
-      id: new Date().toString(),
-      title: (title.current as HTMLInputElement).value,
-      body: "test ini adalah body",
-      archived: false,
-      createdAt: new Date().toString(),
-    }));
-
-    console.log(TODOS_DATA);
-    console.log({ message: "successfully added todo" });
-    
-  };
-
-  const searchTodo = () => {
-    const searchValue = (search.current as HTMLInputElement).value.toLowerCase();
-
-    const findByTitle = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchValue));
-
-    setSearchTodoInputValue(searchValue);
-    SET_SEARCH_TODO_DATA(findByTitle as []);
-    // console.log(searchValue === "" ? "nothing to look for" : findByTitle);
-  };
 
   return (
     <>
       <GlobalsStyles />
       <Header cssXs={{ background: color.primary, height: 40 }}>
         {/* logo - brand */}
-        <Input type="search" placeholder="search todo" ref={search} onChange={searchTodo} />
+        {/* <Input type="search" placeholder="search todo" onChange={searchTodo} /> */}
+        <SearchbarTodos 
+          setSearchTodoInputValue={setSearchTodoInputValue} 
+          TODOS_DATA={TODOS_DATA} 
+          SET_SEARCH_TODOS_DATA={SET_SEARCH_TODOS_DATA} 
+        />
       </Header>
       <Aside>
         {/* optional */}
       </Aside>
       <Main>
         <Article>
-          <H1>My Day</H1>
-          <Small>Friday, June 3</Small>
-          <Form ref={form} onSubmit={(e) => addTodo(e)} cssXs={{ background: "#eee", border: "1px solid red", display: "flex", alignItems: "center", padding: spacing._3 }}>
-            <Button type="submit">
-              <AiOutlinePlus size={24} />
-            </Button>
-            <Input placeholder="Todo title" type="text" ref={title} required />
-            <Input placeholder="Todo body" type="text" ref={body} disabled />
-          </Form>
-          <Div ref={todosContainer}>
-            <__RenderIf is={TODOS_DATA.length === 0}>
-              <P>There is no todos to show</P>
-            </__RenderIf>
+          <Title text="My Day" />
+          <Date text="Friday, June 3" />
+          
+          <FormAddToDo  TODOS_DATA={TODOS_DATA} SET_TODO_DATA={SET_TODO_DATA} />
 
-            <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
-              {TODOS_DATA.map(((data, index) => 
-                <Todo key={index} {...data as TodosData} SET_TODO_DATA={SET_TODO_DATA} />
-              ))}
-            </__RenderIf>
+          <Div>
+            <MessageTodosNotShow TODOS_DATA={TODOS_DATA} />
 
-            <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
-              {SEARCH_TODO_DATA.map(((data, index) => 
-                <Todo key={index} {...data as TodosData} SET_TODO_DATA={SET_TODO_DATA} />
-              ))}
-            </__RenderIf>
+            <AllTodoList 
+              searchTodoInputValue={searchTodoInputValue} 
+              TODOS_DATA={TODOS_DATA} 
+              SET_TODO_DATA={SET_TODO_DATA}
+            />
+
+            <SearchedTodosList 
+              searchTodoInputValue={searchTodoInputValue} 
+              TODOS_DATA={TODOS_DATA} 
+              SET_TODO_DATA={SET_TODO_DATA} 
+              SEARCH_TODOS_DATA={SEARCH_TODOS_DATA as []} 
+            />
           </Div>
         </Article>
       </Main>
@@ -94,27 +70,6 @@ function App(): ReactElement {
   );
 }
 
-interface PropsTodo extends TodosData {
-  SET_TODO_DATA: any;
-}
 
-function Todo({ id, title, body, createdAt, archived, SET_TODO_DATA }: PropsTodo) {
-  const deleteTodo = (id: string) => {
-    const indexOfTodo = TODOS_DATA.findIndex(todo => todo.id === id);
-    SET_TODO_DATA(TODOS_DATA.splice(indexOfTodo, 1));
-
-    console.log(TODOS_DATA);
-    console.log({ message: "successfully deleted todo" });
-  };
-
-  return <>
-    <Section>
-      <H2>{title}</H2>
-      <P>{body}</P>
-      <Small>{createdAt}</Small>
-      <Button onClick={() => deleteTodo(id)}>Delete</Button>
-    </Section>
-  </>;
-}
 
 export default App;

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useState, useEffect } from "react";
 
 /**
@@ -17,12 +18,30 @@ export default function MediaScreen(_option: Option, _screenWidth: ScreenWidth) 
       const getScreenWidth = entries[0].contentRect.width;
 
       switch(_screenWidth) {
-        case "xxl": { width = 1400; break; }
-        case "xl": { width = 1200; break; }
-        case "lg": { width = 992; break; }
-        case "md": { width = 768; break; }
-        case "sm": { width = 576; break; }
-        case "xs": { width = 0; break; }
+        case "xxl": { 
+          width = 1400; 
+          break; 
+        }
+        case "xl": { 
+          width = 1200; 
+          break; 
+        }
+        case "lg": { 
+          width = 992; 
+          break; 
+        }
+        case "md": { 
+          width = 768; 
+          break; 
+        }
+        case "sm": {
+          width = 576; 
+          break; 
+        }
+        case "xs": { 
+          width = 0; 
+          break; 
+        }
         default: {
           if (typeof _screenWidth === "number") { 
             width = _screenWidth; 
@@ -36,12 +55,30 @@ export default function MediaScreen(_option: Option, _screenWidth: ScreenWidth) 
       }
 
       switch(_option) {
-        case ">=": { setScreenWidth(getScreenWidth >= width); break; }
-        case ">": { setScreenWidth(getScreenWidth > width); break; }
-        case "===": { setScreenWidth(getScreenWidth === width); break; }
-        case "<=": { setScreenWidth((getScreenWidth <= width)); break; }
-        case "<": { setScreenWidth(getScreenWidth < width); break; }
-        default: { console.error("_option is invalid value. try '<=' '<' '===' '>' '>='"); break; }
+        case ">=": { 
+          setScreenWidth(getScreenWidth >= width); 
+          break; 
+        }
+        case ">": { 
+          setScreenWidth(getScreenWidth > width); 
+          break; 
+        }
+        case "===": { 
+          setScreenWidth(getScreenWidth === width); 
+          break; 
+        }
+        case "<=": { 
+          setScreenWidth((getScreenWidth <= width)); 
+          break; 
+        }
+        case "<": { 
+          setScreenWidth(getScreenWidth < width); 
+          break; 
+        }
+        default: { 
+          console.error("_option is invalid value. try '<=' '<' '===' '>' '>='"); 
+          break; 
+        }
       }
     });
 

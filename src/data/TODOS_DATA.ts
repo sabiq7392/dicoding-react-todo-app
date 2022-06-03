@@ -1,4 +1,4 @@
-export interface Todos {
+export interface TodosData {
   id: string;
   title: string;
   body: string;
@@ -8,6 +8,6 @@ export interface Todos {
   deletedAt?: string;
 }
 
-const TODOS_DATA: Todos[] = [];
+const TODOS_DATA: TodosData[] = [];
 
 export default TODOS_DATA;

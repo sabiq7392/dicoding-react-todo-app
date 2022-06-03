@@ -3,7 +3,7 @@ import { Article, Aside, Button, Div, Footer, Form, H1, H2, Header, Input, Main,
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "./styles/styles.config";
 import { ReactElement, useId, useRef, useState } from "react";
-import TODOS_DATA, { Todos } from "./data/TODOS_DATA";
+import TODOS_DATA, { TodosData } from "./data/TODOS_DATA";
 import { default as __RenderIf } from "./styles/mame-styled/core/utils/js-syntax/If";
 import { default as __Map } from "./styles/mame-styled/core/utils/js-syntax/Map";
 
@@ -79,25 +79,15 @@ function App(): ReactElement {
             </__RenderIf>
 
             <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
-              {TODOS_DATA.map((({ id, title, body, createdAt }, index) => 
-                <Section key={index}>
-                  <H2>{title}</H2>
-                  <P>{body}</P>
-                  <Small>{createdAt}</Small>
-                  <Button onClick={() => deleteTodo(id)}>Delete</Button>
-                </Section>
+              {TODOS_DATA.map(((data, index) => 
+                <Todo key={index} {...data as TodosData} SET_TODO_DATA={SET_TODO_DATA} />
               ))}
             </__RenderIf>
 
             <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
-              <__Map data={SEARCH_TODO_DATA} render={(({ id, title, body, createdAt }: Todos, index: number) => 
-                <Section key={index}>
-                  <H2>{title}</H2>
-                  <P>{body}</P>
-                  <Small>{createdAt}</Small>
-                  <Button onClick={() => deleteTodo(id)}>Delete</Button>
-                </Section>
-              )}/>
+              {SEARCH_TODO_DATA.map(((data, index) => 
+                <Todo key={index} {...data as TodosData} SET_TODO_DATA={SET_TODO_DATA} />
+              ))}
             </__RenderIf>
           </Div>
         </Article>
@@ -109,6 +99,29 @@ function App(): ReactElement {
       </Footer>
     </>
   );
+}
+
+interface PropsTodo extends TodosData {
+  SET_TODO_DATA: any;
+}
+
+function Todo({ id, title, body, createdAt, archived, SET_TODO_DATA }: PropsTodo) {
+  const deleteTodo = (id: string) => {
+    const indexOfTodo = TODOS_DATA.findIndex(todo => todo.id === id);
+    SET_TODO_DATA(TODOS_DATA.splice(indexOfTodo, 1));
+
+    console.log(TODOS_DATA);
+    console.log({ message: "successfully deleted todo" });
+  };
+
+  return <>
+    <Section>
+      <H2>{title}</H2>
+      <P>{body}</P>
+      <Small>{createdAt}</Small>
+      <Button onClick={() => deleteTodo(id)}>Delete</Button>
+    </Section>
+  </>;
 }
 
 export default App;

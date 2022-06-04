@@ -1,11 +1,9 @@
 import type { ReactElement } from "react";
 import { useState } from "react";
 import GlobalsStyles from "./styles/Globals.styled";
-import { Article, Aside, Button, Div, Footer, Form, H1, H2, Header, Input, Main, P, Section, Small } from "./styles/mame-styled/core/HtmlTag";
+import { Article, Aside, Div, Footer, Header, Main } from "./styles/mame-styled/core/HtmlTag";
 import STYLES_CONFIG from "./styles/styles.config";
 import TODOS_DATA from "./data/TODOS_DATA";
-import { default as __RenderIf } from "./styles/mame-styled/core/utils/js-syntax/If";
-import { default as __Map } from "./styles/mame-styled/core/utils/js-syntax/Map";
 import FormAddToDo from "./components/FormAddToDo";
 import AllTodoList from "./components/AllTodosList";
 import SearchedTodosList from "./components/SearchedTodosList";
@@ -26,7 +24,6 @@ function App(): ReactElement {
       <GlobalsStyles />
       <Header cssXs={{ background: color.primary, height: 40 }}>
         {/* logo - brand */}
-        {/* <Input type="search" placeholder="search todo" onChange={searchTodo} /> */}
         <SearchbarTodos 
           setSearchTodoInputValue={setSearchTodoInputValue} 
           TODOS_DATA={TODOS_DATA} 
@@ -41,10 +38,16 @@ function App(): ReactElement {
           <Title text="My Day" />
           <Date text="Friday, June 3" />
           
-          <FormAddToDo  TODOS_DATA={TODOS_DATA} SET_TODO_DATA={SET_TODO_DATA} />
+          <FormAddToDo  
+            TODOS_DATA={TODOS_DATA} 
+            SET_TODO_DATA={SET_TODO_DATA} 
+          />
 
           <Div>
-            <MessageTodosNotShow TODOS_DATA={TODOS_DATA} />
+            <MessageTodosNotShow 
+              TODOS_DATA={TODOS_DATA} 
+              SEARCH_TODOS_DATA={SEARCH_TODOS_DATA}
+            />
 
             <AllTodoList 
               searchTodoInputValue={searchTodoInputValue} 

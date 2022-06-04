@@ -5,11 +5,12 @@ import { P } from "../styles/mame-styled/core/HtmlTag";
 
 interface Props {
   TODOS_DATA: TodosData[];
+  SEARCH_TODOS_DATA: never[];
 }
 
-export default function MessageTodosNotShow({ TODOS_DATA }: Props): ReactElement {
+export default function MessageTodosNotShow({ TODOS_DATA, SEARCH_TODOS_DATA }: Props): ReactElement {
   return <>
-    <__RenderIf is={TODOS_DATA.length === 0}>
+    <__RenderIf is={TODOS_DATA.length === 0 || SEARCH_TODOS_DATA.length === 0}>
       <P>There is no todos to show</P>
     </__RenderIf>
   </>;

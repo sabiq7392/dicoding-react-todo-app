@@ -1,4 +1,4 @@
-import type { ReactElement, FormEvent } from "react";
+import { ReactElement, FormEvent, KeyboardEvent } from "react";
 import type { SetTodoData, TodosData } from "../types";
 import { useState } from "react";
 import { Form, Button, Input } from "../styles/mame-styled/core/HtmlTag";
@@ -15,20 +15,38 @@ const { spacing } = STYLES_CONFIG;
 export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
+  const [isLengthExceed, setIsLengthExceed] = useState(false);
 
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    SET_TODO_DATA(TODOS_DATA.push({
-      id: new Date().toString(),
-      title: titleValue,
-      body: bodyValue,
-      archived: false,
-      createdAt: new Date().toString(),
-    }));
+    if (isLengthExceed) {
+      alert("Title character length cannot more than 50");
+    }
 
-    console.log(TODOS_DATA);
-    console.log({ message: "successfully added todo" });
+    if (isLengthExceed === false) {
+      SET_TODO_DATA(TODOS_DATA.push({
+        id: new Date().toString(),
+        title: titleValue,
+        body: bodyValue,
+        archived: false,
+        createdAt: new Date().toString(),
+      }));
+
+      console.log(TODOS_DATA);
+      console.log({ message: "successfully added todo" });
+    } 
+  };
+
+  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.currentTarget.value.length);
+    if (e.currentTarget.value.length > 50) {
+      e.currentTarget.style.outline = "1px solid red";
+      setIsLengthExceed(true);
+    } else {
+      e.currentTarget.style.outline = "";
+      setIsLengthExceed(false);
+    }
   };
 
   return <>
@@ -40,7 +58,8 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
         required 
         placeholder="Todo title" 
         type="text" 
-        onChange={(e) => setTitleValue(e.target.value)} 
+        onChange={(e) => setTitleValue(e.target.value)}
+        onKeyUp={handleErrorLimitLengthInputValue}
       />
       <Input 
         placeholder="Todo body" 

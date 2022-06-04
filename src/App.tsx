@@ -7,7 +7,7 @@ import TODOS_DATA from "./data/TODOS_DATA";
 import FormAddToDo from "./components/organisms/FormAddToDo";
 import AllTodosList from "./components/organisms/AllTodosList";
 import SearchedTodosList from "./components/organisms/SearchedTodosList";
-import MessageTodosNotShow from "./components/molecules/MessageTodosNotShow";
+import MessageNotFoundAnyTodos from "./components/molecules/MessageNotFoundAnyTodos";
 import Date from "./components/atoms/Date";
 import Title from "./components/atoms/Title";
 import SearchbarTodos from "./components/molecules/SearchbarTodos";
@@ -49,9 +49,10 @@ function App(): ReactElement {
           <Article title="active todos">
             <Title as={H2} text="Active Todos" />
 
-            <MessageTodosNotShow 
+            <MessageNotFoundAnyTodos 
               TODOS_DATA={TODOS_DATA} 
               SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA}
+              searchTodoInputValue={searchTodoInputValue}
             />
 
             <br />

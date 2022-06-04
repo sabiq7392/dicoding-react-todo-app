@@ -23,6 +23,7 @@ export default function ArchivedTodosList({
         SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
         TODOS_DATA={TODOS_DATA} 
         key={index} 
+        ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
       />
     )}
   </>;

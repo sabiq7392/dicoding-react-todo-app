@@ -7,9 +7,16 @@ interface Props {
   SET_TODO_DATA: SetTodoData;
   SET_ARCHIVED_TODOS_DATA: SetArchivedTodosData,
   searchTodoInputValue: SearchTodoInputValue;
+  ARCHIVED_TODOS_DATA: TodosData[];
 }
 
-export default function AllTodoList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue, SET_ARCHIVED_TODOS_DATA }: Props) {
+export default function AllTodoList({ 
+  SET_TODO_DATA, 
+  TODOS_DATA, 
+  searchTodoInputValue, 
+  SET_ARCHIVED_TODOS_DATA,
+  ARCHIVED_TODOS_DATA,
+}: Props) {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
       {TODOS_DATA.map(((data, index) => 
@@ -19,6 +26,7 @@ export default function AllTodoList({ SET_TODO_DATA, TODOS_DATA, searchTodoInput
             SET_TODO_DATA={SET_TODO_DATA}
             TODOS_DATA={TODOS_DATA} 
             SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
+            ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
           />
         </__RenderIf>
       ))}

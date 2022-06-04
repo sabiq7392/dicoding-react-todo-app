@@ -8,6 +8,7 @@ interface Props {
   SET_TODO_DATA: SetTodoData;
   SEARCHED_TODOS_DATA: SearchTodosData;
   SET_ARCHIVED_TODOS_DATA: SetArchivedTodosData;
+  ARCHIVED_TODOS_DATA: TodosData[];
   searchTodoInputValue: SearchTodoInputValue;
 }
 
@@ -17,6 +18,7 @@ export default function SearchedTodosList({
   searchTodoInputValue, 
   SET_TODO_DATA,
   SET_ARCHIVED_TODOS_DATA,
+  ARCHIVED_TODOS_DATA,
 }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
@@ -27,6 +29,7 @@ export default function SearchedTodosList({
             SET_TODO_DATA={SET_TODO_DATA}
             SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA} 
             TODOS_DATA={TODOS_DATA} 
+            ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
           />
         </__RenderIf>
       ))}

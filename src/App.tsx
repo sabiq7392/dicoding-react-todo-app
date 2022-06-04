@@ -20,6 +20,7 @@ function App(): ReactElement {
   const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
   const [ARCHIVED_TODOS_DATA, SET_ARCHIVED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
+  console.log({ ARCHIVED_TODOS_DATA, SEARCHED_TODOS_DATA });
 
   return (
     <>
@@ -60,6 +61,7 @@ function App(): ReactElement {
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA}
               SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
+              ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
             />
 
             <SearchedTodosList 
@@ -68,6 +70,7 @@ function App(): ReactElement {
               SET_TODO_DATA={SET_TODO_DATA} 
               SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA as []} 
               SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
+              ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
             />
           </Article>
 

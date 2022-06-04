@@ -10,7 +10,7 @@ interface Props {
 
 export default function MessageTodosNotShow({ TODOS_DATA, SEARCHED_TODOS_DATA }: Props): ReactElement {
   return <>
-    <__RenderIf is={TODOS_DATA.length === 0 || SEARCHED_TODOS_DATA.length === 0}>
+    <__RenderIf is={TODOS_DATA.length === 0 || SEARCHED_TODOS_DATA.length === 0}> 
       <P>There is no todos to show</P>
     </__RenderIf>
   </>;

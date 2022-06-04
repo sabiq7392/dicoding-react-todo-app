@@ -5,7 +5,7 @@ import { Article, Aside, Footer, H1, H2, Header, Main } from "./styles/mame-styl
 import STYLES_CONFIG from "./styles/styles.config";
 import TODOS_DATA from "./data/TODOS_DATA";
 import FormAddToDo from "./components/organisms/FormAddToDo";
-import AllTodoList from "./components/organisms/AllTodosList";
+import AllTodosList from "./components/organisms/AllTodosList";
 import SearchedTodosList from "./components/organisms/SearchedTodosList";
 import MessageTodosNotShow from "./components/molecules/MessageTodosNotShow";
 import Date from "./components/atoms/Date";
@@ -56,7 +56,7 @@ function App(): ReactElement {
 
             <br />
 
-            <AllTodoList 
+            <AllTodosList 
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA}

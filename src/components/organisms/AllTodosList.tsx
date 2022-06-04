@@ -10,7 +10,7 @@ interface Props {
   ARCHIVED_TODOS_DATA: TodosData[];
 }
 
-export default function AllTodoList({ 
+export default function AllTodosList({ 
   SET_TODO_DATA, 
   TODOS_DATA, 
   searchTodoInputValue, 

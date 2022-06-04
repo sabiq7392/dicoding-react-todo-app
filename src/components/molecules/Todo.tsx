@@ -1,4 +1,5 @@
-import type { ReactElement } from "react";
+import type { FormEvent, ReactElement, } from "react";
+import { useRef } from "react";
 import { Section, P, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
 import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
 import Title from "../atoms/Title";
@@ -20,6 +21,8 @@ export default function Todo({
   SET_ARCHIVED_TODOS_DATA,
   TODOS_DATA,
 }: Props): ReactElement {
+  const paragraph = useRef<HTMLParagraphElement>();
+
   const findIndexTodo = (id: Id, data: TodosData[]) => data.findIndex(todo => todo.id === id);
 
   const deleteTodo = (id: Id) => {
@@ -58,15 +61,28 @@ export default function Todo({
     return unarchivedTodo(id);
   };
 
+  const onParagraphInputHandler = (e: FormEvent<HTMLParagraphElement>) => {
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].body = (e.currentTarget.textContent as string));
+    console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
+  };
+
+  const onTitleInputHandler = (e: FormEvent<HTMLParagraphElement>) => {
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].title = (e.currentTarget.textContent as string));
+    console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
+  };
+
   return <>
     <Section aria-current={archived}>
-      <Title as={H3} text={title} />
-      <P>{body}</P>
+      <Title as={H3} text={title} onInput={onTitleInputHandler} contentEditable suppressContentEditableWarning />
+      <P ref={paragraph} onInput={onParagraphInputHandler} contentEditable suppressContentEditableWarning>
+        {body}
+      </P>
       <Small>{createdAt}</Small>
       <Button onClick={onDeleteClickHandler}>Delete</Button>
       <Button onClick={onArchiveClickHandler}>
         {archived === false ? "Archived" : "Unarchived"}
       </Button>
+      {/* <Button onClick={onEditClickHandler}>Edit</Button> */}
     </Section>
   </>;
 }

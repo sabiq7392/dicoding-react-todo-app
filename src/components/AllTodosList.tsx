@@ -1,11 +1,11 @@
 import { default as __RenderIf } from "../styles/mame-styled/core/utils/js-syntax/If";
-import type { SetTodoData, TodosData } from "../types";
+import type { SearchTodoInputValue, SetTodoData, TodosData } from "../types";
 import Todo from "./Todo";
 
 interface Props {
   TODOS_DATA: TodosData[];
   SET_TODO_DATA: SetTodoData;
-  searchTodoInputValue: string;
+  searchTodoInputValue: SearchTodoInputValue;
 }
 
 export default function AllTodoList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue }: Props) {

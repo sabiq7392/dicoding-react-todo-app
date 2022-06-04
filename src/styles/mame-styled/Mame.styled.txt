@@ -2,7 +2,7 @@
 @author 
   Sabiq Muhammad Antebing Mame
 
-@contact
+@contacts
   github: sabiq7392 || https://github.com/sabiq7392
   linkedin: Sabiq Muhammad || https://www.linkedin.com/in/sabiq-muhammad-6b314a210/
   email: sabiqmuhammad98@gmail.com

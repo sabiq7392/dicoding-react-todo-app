@@ -1,9 +1,10 @@
-import { ReactElement, FormEvent, KeyboardEvent } from "react";
+import { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
 import type { SetTodoData, TodosData } from "../types";
 import { useState } from "react";
-import { Form, Button, Input } from "../styles/mame-styled/core/HtmlTag";
+import { Form, Button, Input, Div } from "../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../styles/styles.config";
+import ErrorMessage from "./ErrorMessage";
 
 interface Props {
   TODOS_DATA: TodosData[];
@@ -38,8 +39,7 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     } 
   };
 
-  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value.length);
+  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value.length > 50) {
       e.currentTarget.style.outline = "1px solid red";
       setIsLengthExceed(true);
@@ -54,13 +54,19 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
       <Button type="submit">
         <AiOutlinePlus size={24} />
       </Button>
-      <Input 
-        required 
-        placeholder="Todo title" 
-        type="text" 
-        onChange={(e) => setTitleValue(e.target.value)}
-        onKeyUp={handleErrorLimitLengthInputValue}
-      />
+      <Div cssXs={{ display: "grid" }}>
+        <Input 
+          required 
+          placeholder="Todo title" 
+          type="text" 
+          onChange={(e) => {
+            setTitleValue(e.target.value);
+            handleErrorLimitLengthInputValue(e);
+          }}
+          onKeyUp={handleErrorLimitLengthInputValue}
+        />
+        <ErrorMessage ifIs={isLengthExceed} text="max length character 50" />
+      </Div>
       <Input 
         placeholder="Todo body" 
         type="text" 
@@ -69,3 +75,5 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     </Form>
   </>;
 }
+
+

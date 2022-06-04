@@ -39,7 +39,7 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     } 
   };
 
-  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>, limit = 50) => {
+  const handleErrorInputLengthExceed = (e: KeyboardEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>, limit = 50) => {
     if (e.currentTarget.value.length > limit) {
       e.currentTarget.style.outline = "1px solid red";
       setIsLengthExceed(true);
@@ -55,11 +55,11 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
 
   const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleValue(e.target.value);
-    handleErrorLimitLengthInputValue(e);
+    handleErrorInputLengthExceed(e);
   };
 
   const onTitleKeyUpChangeHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    handleErrorLimitLengthInputValue(e);
+    handleErrorInputLengthExceed(e);
   };
 
   const onBodyChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

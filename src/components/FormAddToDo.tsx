@@ -39,8 +39,8 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     } 
   };
 
-  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value.length > 50) {
+  const handleErrorLimitLengthInputValue = (e: KeyboardEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement>, limit = 50) => {
+    if (e.currentTarget.value.length > limit) {
       e.currentTarget.style.outline = "1px solid red";
       setIsLengthExceed(true);
     } else {
@@ -49,9 +49,26 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     }
   };
 
+  const onFormSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    addTodo(e);
+  };
+
+  const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleValue(e.target.value);
+    handleErrorLimitLengthInputValue(e);
+  };
+
+  const onTitleKeyUpChangeHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    handleErrorLimitLengthInputValue(e);
+  };
+
+  const onBodyChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setBodyValue(e.target.value);
+  };
+
   return <>
-    <Form onSubmit={addTodo} cssXs={{ background: "#eee", border: "1px solid red", display: "flex", alignItems: "center", padding: spacing._3 }}>
-      <Button type="submit">
+    <Form onSubmit={onFormSubmitHandler} cssXs={{ background: "#eee", border: "1px solid red", display: "flex", alignItems: "center", padding: spacing._3 }}>
+      <Button type="submit" aria-label="add todo">
         <AiOutlinePlus size={24} />
       </Button>
       <Div cssXs={{ display: "grid" }}>
@@ -59,18 +76,15 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
           required 
           placeholder="Todo title" 
           type="text" 
-          onChange={(e) => {
-            setTitleValue(e.target.value);
-            handleErrorLimitLengthInputValue(e);
-          }}
-          onKeyUp={handleErrorLimitLengthInputValue}
+          onChange={onTitleChangeHandler}
+          onKeyUp={onTitleKeyUpChangeHandler}
         />
         <ErrorMessage ifIs={isLengthExceed} text="max length character 50" />
       </Div>
       <Input 
         placeholder="Todo body" 
         type="text" 
-        onChange={(e) => setBodyValue(e.target.value)} 
+        onChange={onBodyChangeHandler} 
       />
     </Form>
   </>;

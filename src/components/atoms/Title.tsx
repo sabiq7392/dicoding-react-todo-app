@@ -1,5 +1,5 @@
 import { createElement, ReactElement } from "react";
-import type { Heading } from "../types";
+import type { Heading } from "../../types";
 
 interface Props {
   text: string;

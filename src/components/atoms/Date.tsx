@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Small } from "../styles/mame-styled/core/HtmlTag";
+import { Small } from "../../styles/mame-styled/core/HtmlTag";
 
 interface Props {
   text: string;

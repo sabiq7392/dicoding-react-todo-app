@@ -5,20 +5,20 @@ import GlobalsStyles from "./styles/Globals.styled";
 import { Article, Aside, Div, Footer, H1, H2, Header, Main, Section, P, Small, Button } from "./styles/mame-styled/core/HtmlTag";
 import STYLES_CONFIG from "./styles/styles.config";
 import TODOS_DATA from "./data/TODOS_DATA";
-import FormAddToDo from "./components/FormAddToDo";
-import AllTodoList from "./components/AllTodosList";
-import SearchedTodosList from "./components/SearchedTodosList";
-import MessageTodosNotShow from "./components/MessageTodosNotShow";
-import Date from "./components/Date";
-import Title from "./components/Title";
-import SearchbarTodos from "./components/SearchbarTodos";
-import ArchivedTodosList from "./components/ArchivedTodosList";
+import FormAddToDo from "./components/organisms/FormAddToDo";
+import AllTodoList from "./components/organisms/AllTodosList";
+import SearchedTodosList from "./components/organisms/SearchedTodosList";
+import MessageTodosNotShow from "./components/molecules/MessageTodosNotShow";
+import Date from "./components/atoms/Date";
+import Title from "./components/atoms/Title";
+import SearchbarTodos from "./components/molecules/SearchbarTodos";
+import ArchivedTodosList from "./components/organisms/ArchivedTodosList";
 
 const { color } = STYLES_CONFIG;
 
 function App(): ReactElement {
   const [TODO_DATA, SET_TODO_DATA] = useState({});
-  const [SEARCH_TODOS_DATA, SET_SEARCH_TODOS_DATA] = useState([]);
+  const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
   const [ARCHIVED_TODOS_DATA, SET_ARCHIVED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
@@ -30,7 +30,7 @@ function App(): ReactElement {
         <SearchbarTodos 
           setSearchTodoInputValue={setSearchTodoInputValue} 
           TODOS_DATA={TODOS_DATA} 
-          SET_SEARCH_TODOS_DATA={SET_SEARCH_TODOS_DATA} 
+          SET_SEARCHED_TODOS_DATA={SET_SEARCHED_TODOS_DATA} 
         />
       </Header>
       <Aside>
@@ -51,7 +51,7 @@ function App(): ReactElement {
 
             <MessageTodosNotShow 
               TODOS_DATA={TODOS_DATA} 
-              SEARCH_TODOS_DATA={SEARCH_TODOS_DATA}
+              SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA}
             />
 
             <br />
@@ -67,7 +67,7 @@ function App(): ReactElement {
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA} 
-              SEARCH_TODOS_DATA={SEARCH_TODOS_DATA as []} 
+              SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA as []} 
               SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
             />
           </Article>

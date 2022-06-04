@@ -1,10 +1,10 @@
 import { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
-import type { SetTodoData, TodosData } from "../types";
+import type { SetTodoData, TodosData } from "../../types";
 import { useState } from "react";
-import { Form, Button, Input, Div } from "../styles/mame-styled/core/HtmlTag";
+import { Form, Button, Input, Div } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
-import STYLES_CONFIG from "../styles/styles.config";
-import ErrorMessage from "./ErrorMessage";
+import STYLES_CONFIG from "../../styles/styles.config";
+import ErrorMessage from "../molecules/ErrorMessage";
 
 interface Props {
   TODOS_DATA: TodosData[];

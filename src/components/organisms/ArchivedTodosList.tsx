@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
-import Todo from "./Todo";
-import type { SetArchivedTodosData, SetTodoData, TodosData } from "../types";
+import Todo from "../molecules/Todo";
+import type { SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
 
 interface Props {
   TODOS_DATA: TodosData[];

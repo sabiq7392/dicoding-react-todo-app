@@ -1,6 +1,6 @@
-import { default as __RenderIf } from "../styles/mame-styled/core/utils/js-syntax/If";
-import type { SearchTodoInputValue, SetArchivedTodosData, SetTodoData, TodosData } from "../types";
-import Todo from "./Todo";
+import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
+import type { SearchTodoInputValue, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
+import Todo from "../molecules/Todo";
 
 interface Props {
   TODOS_DATA: TodosData[];

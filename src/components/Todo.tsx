@@ -8,7 +8,7 @@ interface Props extends TodosData {
 }
 
 export default function Todo({ id, title, body, createdAt, archived, SET_TODO_DATA, TODOS_DATA }: Props): ReactElement {
-  const deleteTodo = (id: string) => {
+  const deleteTodo = (id: string | number) => {
     const indexOfTodo = TODOS_DATA.findIndex(todo => todo.id === id);
     SET_TODO_DATA(TODOS_DATA.splice(indexOfTodo, 1));
 

@@ -6,7 +6,7 @@ export type SetSeachTodoInputValue = (value: SetStateAction<string>) => void;
 export type SearchTodosData = never[];
 export type SearchTodoInputValue = string;
 export interface TodosData {
-  id: string;
+  id: string | number;
   title: string;
   body: string;
   archived: boolean;

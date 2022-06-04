@@ -26,12 +26,19 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
     }
 
     if (isLengthExceed === false) {
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+
       SET_TODO_DATA(TODOS_DATA.push({
-        id: new Date().toString(),
+        id: new Date().toLocaleDateString("id-ID", options as any),
         title: titleValue,
         body: bodyValue,
         archived: false,
-        createdAt: new Date().toString(),
+        createdAt: new Date().toLocaleDateString("id-ID", options as any),
       }));
 
       console.log(TODOS_DATA);

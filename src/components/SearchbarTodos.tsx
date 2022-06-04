@@ -16,8 +16,11 @@ export default function SearchbarTodos({ TODOS_DATA, SET_SEARCH_TODOS_DATA, setS
 
     setSearchTodoInputValue(searchValue);
     SET_SEARCH_TODOS_DATA(searchedTodos as []);
-    // console.log(searchValue === "" ? "nothing to look for" : searchedTodos);
   };
 
-  return <Input type="search" placeholder="search todo" onChange={searchTodo} />;
+  const onSearchTodoChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    searchTodo(e);
+  };
+
+  return <Input type="search" placeholder="search todo" onChange={onSearchTodoChangeHandler} />;
 }

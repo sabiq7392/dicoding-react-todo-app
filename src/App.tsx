@@ -13,7 +13,6 @@ import Date from "./components/Date";
 import Title from "./components/Title";
 import SearchbarTodos from "./components/SearchbarTodos";
 import ArchivedTodosList from "./components/ArchivedTodosList";
-import Todo from "./components/Todo";
 
 const { color } = STYLES_CONFIG;
 

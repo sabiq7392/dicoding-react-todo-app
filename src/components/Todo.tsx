@@ -1,10 +1,11 @@
 import type { ReactElement } from "react";
 import { Section, P, Small, Button, H3 } from "../styles/mame-styled/core/HtmlTag";
-import type { Id, SetTodoData, TodosData } from "../types";
+import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../types";
 import Title from "./Title";
 
 interface Props extends TodosData {
   SET_TODO_DATA: SetTodoData;
+  SET_ARCHIVED_TODOS_DATA: SetArchivedTodosData;
   TODOS_DATA: TodosData[];
 }
 
@@ -15,6 +16,7 @@ export default function Todo({
   createdAt, 
   archived, 
   SET_TODO_DATA, 
+  SET_ARCHIVED_TODOS_DATA,
   TODOS_DATA,
 }: Props): ReactElement {
   const findIndexTodo = (id: Id) =>TODOS_DATA.findIndex(todo => todo.id === id);
@@ -27,9 +29,12 @@ export default function Todo({
   };
 
   const archiveTodo = (id: Id) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id)].archived = true);
+    TODOS_DATA[findIndexTodo(id)].archived = true;
     
-    console.log(TODOS_DATA[findIndexTodo(id)], { all: TODOS_DATA });
+    const archivedTodos = TODOS_DATA.filter(todo => todo.archived === true);
+    SET_ARCHIVED_TODOS_DATA(archivedTodos as []);
+
+    console.log(archivedTodos);
     console.log({ message: "successfully archived todo" });
   };
   

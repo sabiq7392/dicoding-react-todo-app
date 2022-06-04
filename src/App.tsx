@@ -1,8 +1,7 @@
 import type { ReactElement } from "react";
-import type { TodosData } from "./types";
 import { useState } from "react";
 import GlobalsStyles from "./styles/Globals.styled";
-import { Article, Aside, Div, Footer, H1, H2, Header, Main, Section, P, Small, Button } from "./styles/mame-styled/core/HtmlTag";
+import { Article, Aside, Footer, H1, H2, Header, Main } from "./styles/mame-styled/core/HtmlTag";
 import STYLES_CONFIG from "./styles/styles.config";
 import TODOS_DATA from "./data/TODOS_DATA";
 import FormAddToDo from "./components/organisms/FormAddToDo";
@@ -17,7 +16,7 @@ import ArchivedTodosList from "./components/organisms/ArchivedTodosList";
 const { color } = STYLES_CONFIG;
 
 function App(): ReactElement {
-  const [TODO_DATA, SET_TODO_DATA] = useState({});
+  const [, SET_TODO_DATA] = useState({});
   const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
   const [ARCHIVED_TODOS_DATA, SET_ARCHIVED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");

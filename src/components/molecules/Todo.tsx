@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { Section, P, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
+import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
 import Title from "../atoms/Title";
 
@@ -52,7 +53,9 @@ export default function Todo({
       <P>{body}</P>
       <Small>{createdAt}</Small>
       <Button onClick={onDeleteClickHandler}>Delete</Button>
-      <Button onClick={onArchiveClickHandler}>Archive</Button>
+      <Button onClick={onArchiveClickHandler}>
+        {archived === false ? "Archived" : "Unarchived"}
+      </Button>
     </Section>
   </>;
 }

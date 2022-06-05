@@ -1,6 +1,6 @@
-import type { FormEvent, ReactElement, } from "react";
+import type { FormEvent, ReactElement, FocusEvent } from "react";
 import { useRef } from "react";
-import { Section, P, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
+import { Section, P, Small, Button, H3, Blockquote, Div } from "../../styles/mame-styled/core/HtmlTag";
 import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
 import Title from "../atoms/Title";
 
@@ -61,20 +61,20 @@ export default function Todo({
     return unarchivedTodo(id);
   };
 
-  const onParagraphInputHandler = (e: FormEvent<HTMLParagraphElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].body = (e.currentTarget.textContent as string));
+  const onTitleInputHandler = (e: FocusEvent<HTMLHeadingElement>) => {
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].title = (e.currentTarget.textContent as string));
     console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
   };
 
-  const onTitleInputHandler = (e: FormEvent<HTMLParagraphElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].title = (e.currentTarget.textContent as string));
+  const onParagraphInputHandler = (e: FocusEvent<HTMLParagraphElement>) => {
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].body = (e.currentTarget.textContent as string));
     console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
   };
 
   return <>
     <Section aria-current={archived}>
-      <Title as={H3} text={title} onInput={onTitleInputHandler} contentEditable suppressContentEditableWarning />
-      <P ref={paragraph} onInput={onParagraphInputHandler} contentEditable suppressContentEditableWarning>
+      <Title as={H3} text={title} onBlur={onTitleInputHandler} contentEditable suppressContentEditableWarning />
+      <P ref={paragraph} onBlur={onParagraphInputHandler} contentEditable suppressContentEditableWarning>
         {body}
       </P>
       <Small>{createdAt}</Small>

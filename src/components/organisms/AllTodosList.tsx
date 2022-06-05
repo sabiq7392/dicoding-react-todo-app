@@ -1,3 +1,4 @@
+import { P } from "../../styles/mame-styled/core/HtmlTag";
 import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import type { SearchTodoInputValue, SetTodoData, TodosData } from "../../types";
 import Todo from "../molecules/Todo";
@@ -20,6 +21,9 @@ export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInpu
           />
         </__RenderIf>
       ))}
+    </__RenderIf>
+    <__RenderIf is={TODOS_DATA.length === 0}>
+      <P>There is no todos to show</P>
     </__RenderIf>
   </>;
 }

@@ -8,12 +8,7 @@ interface Props {
   SET_TODO_DATA: SetTodoData;
 }
 
-export default function ArchivedTodosList({ 
-  // ARCHIVED_TODOS_DATA, 
-  SET_TODO_DATA, 
-  // SET_ARCHIVED_TODOS_DATA, 
-  TODOS_DATA 
-}: Props): ReactElement {
+export default function ArchivedTodosList({ SET_TODO_DATA, TODOS_DATA }: Props): ReactElement {
   return <>
     {TODOS_DATA.map((todo, index) => 
       <If key={index} is={todo.archived}>

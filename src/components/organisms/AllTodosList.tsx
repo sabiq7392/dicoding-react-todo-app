@@ -8,13 +8,7 @@ interface Props {
   searchTodoInputValue: SearchTodoInputValue;
 }
 
-export default function AllTodosList({ 
-  SET_TODO_DATA, 
-  TODOS_DATA, 
-  searchTodoInputValue, 
-  // SET_ARCHIVED_TODOS_DATA,
-  // ARCHIVED_TODOS_DATA,
-}: Props) {
+export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue }: Props) {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
       {TODOS_DATA.map(((todo, index) => 

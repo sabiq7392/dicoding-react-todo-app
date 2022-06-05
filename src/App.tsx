@@ -17,13 +17,11 @@ const { color } = STYLES_CONFIG;
 
 function App(): ReactElement {
   const [, SET_TODO_DATA] = useState({});
-  const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
   console.log({ 
-    SEARCHED_TODOS_DATA, 
     TODOS_DATA, 
     LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string) 
   });
@@ -33,11 +31,7 @@ function App(): ReactElement {
       <GlobalsStyles />
       <Header cssXs={{ background: color.primary, height: 40 }}>
         {/* logo - brand */}
-        <SearchbarTodos 
-          setSearchTodoInputValue={setSearchTodoInputValue} 
-          TODOS_DATA={TODOS_DATA} 
-          SET_SEARCHED_TODOS_DATA={SET_SEARCHED_TODOS_DATA} 
-        />
+        <SearchbarTodos setSearchTodoInputValue={setSearchTodoInputValue} />
       </Header>
       <Aside>
         {/* optional */}
@@ -55,11 +49,11 @@ function App(): ReactElement {
           <Article title="active todos">
             <Title as={H2} text="Active Todos" />
 
-            <MessageNotFoundAnyTodos 
+            {/* <MessageNotFoundAnyTodos 
               TODOS_DATA={TODOS_DATA} 
               SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA}
               searchTodoInputValue={searchTodoInputValue}
-            />
+            /> */}
 
             <br />
 
@@ -73,7 +67,6 @@ function App(): ReactElement {
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA} 
-              SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA as []} 
             />
           </Article>
 
@@ -86,8 +79,6 @@ function App(): ReactElement {
               TODOS_DATA={TODOS_DATA}
               SET_TODO_DATA={SET_TODO_DATA}
             />
-
-            {/* <ArchivedTodosList /> */}
           </Article>
         </Article>
       </Main>

@@ -18,13 +18,11 @@ const { color } = STYLES_CONFIG;
 function App(): ReactElement {
   const [, SET_TODO_DATA] = useState({});
   const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
-  const [ARCHIVED_TODOS_DATA, SET_ARCHIVED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
   console.log({ 
-    ARCHIVED_TODOS_DATA, 
     SEARCHED_TODOS_DATA, 
     TODOS_DATA, 
     LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string) 
@@ -69,8 +67,6 @@ function App(): ReactElement {
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA}
-              SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
-              ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
             />
 
             <SearchedTodosList 
@@ -78,8 +74,6 @@ function App(): ReactElement {
               TODOS_DATA={TODOS_DATA} 
               SET_TODO_DATA={SET_TODO_DATA} 
               SEARCHED_TODOS_DATA={SEARCHED_TODOS_DATA as []} 
-              SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
-              ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
             />
           </Article>
 
@@ -90,8 +84,6 @@ function App(): ReactElement {
 
             <ArchivedTodosList 
               TODOS_DATA={TODOS_DATA}
-              ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
-              SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
               SET_TODO_DATA={SET_TODO_DATA}
             />
 

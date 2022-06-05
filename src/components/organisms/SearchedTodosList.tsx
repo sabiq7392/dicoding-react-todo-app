@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type { SearchTodoInputValue, SearchTodosData, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
+import type { SearchTodoInputValue, SearchTodosData, SetTodoData, TodosData } from "../../types";
 import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import Todo from "../molecules/Todo";
 
@@ -7,8 +7,6 @@ interface Props {
   TODOS_DATA: TodosData[];
   SET_TODO_DATA: SetTodoData;
   SEARCHED_TODOS_DATA: SearchTodosData;
-  SET_ARCHIVED_TODOS_DATA: SetArchivedTodosData;
-  ARCHIVED_TODOS_DATA: TodosData[];
   searchTodoInputValue: SearchTodoInputValue;
 }
 
@@ -17,8 +15,6 @@ export default function SearchedTodosList({
   SEARCHED_TODOS_DATA, 
   searchTodoInputValue, 
   SET_TODO_DATA,
-  SET_ARCHIVED_TODOS_DATA,
-  ARCHIVED_TODOS_DATA,
 }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
@@ -27,9 +23,7 @@ export default function SearchedTodosList({
           <Todo 
             {...todo as TodosData} 
             SET_TODO_DATA={SET_TODO_DATA}
-            SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA} 
             TODOS_DATA={TODOS_DATA} 
-            ARCHIVED_TODOS_DATA={ARCHIVED_TODOS_DATA}
           />
         </__RenderIf>
       ))}

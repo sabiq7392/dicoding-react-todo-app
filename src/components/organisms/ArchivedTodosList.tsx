@@ -16,9 +16,9 @@ export default function ArchivedTodosList({
   TODOS_DATA 
 }: Props): ReactElement {
   return <>
-    {ARCHIVED_TODOS_DATA.map((data: { title: string }, index) => 
+    {ARCHIVED_TODOS_DATA.map((todo, index) => 
       <Todo 
-        {...data as TodosData} 
+        {...todo as TodosData} 
         SET_TODO_DATA={SET_TODO_DATA}
         SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA}
         TODOS_DATA={TODOS_DATA} 

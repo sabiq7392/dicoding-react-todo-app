@@ -12,10 +12,10 @@ export default function SearchbarTodos({ TODOS_DATA, SET_SEARCHED_TODOS_DATA, se
   const searchTodo = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
 
-    const searchedTodos = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchValue));
+    const data = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchValue));
 
     setSearchTodoInputValue(searchValue);
-    SET_SEARCHED_TODOS_DATA(searchedTodos as []);
+    SET_SEARCHED_TODOS_DATA(data as []);
   };
 
   const onSearchTodoChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

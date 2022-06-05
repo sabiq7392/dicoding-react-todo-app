@@ -20,7 +20,11 @@ function App(): ReactElement {
   const [SEARCHED_TODOS_DATA, SET_SEARCHED_TODOS_DATA] = useState([]);
   const [ARCHIVED_TODOS_DATA, SET_ARCHIVED_TODOS_DATA] = useState([]);
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
-  console.log({ ARCHIVED_TODOS_DATA, SEARCHED_TODOS_DATA });
+
+  localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
+
+  // eslint-disable-next-line prefer-spread
+  console.log({ ARCHIVED_TODOS_DATA, SEARCHED_TODOS_DATA, TODOS_DATA });
 
   return (
     <>

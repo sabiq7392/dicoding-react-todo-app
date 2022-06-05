@@ -22,10 +22,10 @@ export default function SearchedTodosList({
 }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
-      {SEARCHED_TODOS_DATA.map(((data, index) => 
-        <__RenderIf is={data.archived === false} key={index}>
+      {SEARCHED_TODOS_DATA.map(((todo, index) => 
+        <__RenderIf is={todo.archived === false} key={index}>
           <Todo 
-            {...data as TodosData} 
+            {...todo as TodosData} 
             SET_TODO_DATA={SET_TODO_DATA}
             SET_ARCHIVED_TODOS_DATA={SET_ARCHIVED_TODOS_DATA} 
             TODOS_DATA={TODOS_DATA} 

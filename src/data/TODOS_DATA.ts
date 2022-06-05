@@ -1,6 +1,12 @@
 import type { TodosData } from "../types";
 
-const TODOS_DATA: TodosData[] = [  
+export const NO_INITIAL_DICODING_DATA = true;  // SET TRUE TO USE REAL CASE SET FALSE 
+
+const LOCAL_STORAGE_DATA = (
+  localStorage.getItem("todos_data") ? JSON.parse(localStorage.getItem("todos_data") as string) : []
+);
+
+const TODOS_DATA: TodosData[] = NO_INITIAL_DICODING_DATA ? LOCAL_STORAGE_DATA : [  
   {
     id: 1,
     title: "Babel",
@@ -44,5 +50,6 @@ const TODOS_DATA: TodosData[] = [
     archived: false,
   },
 ];
+
 
 export default TODOS_DATA;

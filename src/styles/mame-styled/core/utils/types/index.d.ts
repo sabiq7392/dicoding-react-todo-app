@@ -1,6 +1,6 @@
 import { CSSProp } from "styled-components";
 import { H1, H2, H3, H4, H5, H6 } from "../../HtmlTag";
-import { HTMLAttributes, MutableRefObject } from "react";
+import type { AriaAttributes, HTMLAttributes, MutableRefObject } from "react";
 
 export type THead = typeof H1 | typeof H2 |  typeof H3 | typeof H4 |  typeof H5 |  typeof H6;
 
@@ -55,7 +55,9 @@ export type FlexDirection = (
 
 export type Ref = MutableRefObject<HTMLElement | undefined>
 
-export interface HTMLTag extends HTMLAttributes<HTMLElement> {
+export interface HTMLTag extends 
+HTMLAttributes<HTMLElement>, 
+AriaAttributes<HTMLElement> {
   cssXs?: CSSAllIn;
   cssSm?: CSSAllIn; 
   cssMd?: CSSAllIn;

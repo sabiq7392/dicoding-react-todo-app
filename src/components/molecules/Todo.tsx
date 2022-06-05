@@ -1,6 +1,6 @@
-import type { FormEvent, ReactElement, FocusEvent } from "react";
+import type { ReactElement, FocusEvent } from "react";
 import { useRef } from "react";
-import { Section, P, Small, Button, H3, Blockquote, Div } from "../../styles/mame-styled/core/HtmlTag";
+import { Section, P, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
 import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
 import Title from "../atoms/Title";
 
@@ -35,8 +35,8 @@ export default function Todo({
   const archiveTodo = (id: Id) => {
     SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].archived = true);
     
-    const archivedTodos = TODOS_DATA.filter(todo => todo.archived === true);
-    SET_ARCHIVED_TODOS_DATA(archivedTodos as []);
+    const data = TODOS_DATA.filter(todo => todo.archived === true);
+    SET_ARCHIVED_TODOS_DATA(data as []);
 
     console.log({ message: "successfully archived todo" });
   };
@@ -44,9 +44,9 @@ export default function Todo({
   const unarchivedTodo = (id: Id) => {
     SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].archived = false);
     
-    const archivedTodos = TODOS_DATA.filter(todo => todo.archived === true);
+    const data = TODOS_DATA.filter(todo => todo.archived === true);
 
-    SET_ARCHIVED_TODOS_DATA(archivedTodos as []);
+    SET_ARCHIVED_TODOS_DATA(data as []);
     console.log({ message: "successfully unarchived todo" });
   };
   
@@ -72,7 +72,7 @@ export default function Todo({
   };
 
   return <>
-    <Section aria-current={archived}>
+    <Section aria-current={archived} aria-label={title}>
       <Title as={H3} text={title} onBlur={onTitleInputHandler} contentEditable suppressContentEditableWarning />
       <P ref={paragraph} onBlur={onParagraphInputHandler} contentEditable suppressContentEditableWarning>
         {body}
@@ -82,7 +82,6 @@ export default function Todo({
       <Button onClick={onArchiveClickHandler}>
         {archived === false ? "Archived" : "Unarchived"}
       </Button>
-      {/* <Button onClick={onEditClickHandler}>Edit</Button> */}
     </Section>
   </>;
 }

@@ -1,7 +1,7 @@
 import type { ReactElement, FocusEvent } from "react";
-import { useRef } from "react";
-import { Section, P, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
+import { Section, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
 import type { Id, SetArchivedTodosData, SetTodoData, TodosData } from "../../types";
+import Paragraph from "../atoms/Paragraph";
 import Title from "../atoms/Title";
 
 interface Props extends TodosData {
@@ -21,12 +21,11 @@ export default function Todo({
   SET_ARCHIVED_TODOS_DATA,
   TODOS_DATA,
 }: Props): ReactElement {
-  const paragraph = useRef<HTMLParagraphElement>();
-
   const findIndexTodo = (id: Id, data: TodosData[]) => data.findIndex(todo => todo.id === id);
 
   const deleteTodo = (id: Id) => {
     SET_TODO_DATA(TODOS_DATA.splice(findIndexTodo(id, TODOS_DATA), 1));
+    localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
     console.log(TODOS_DATA);
     console.log({ message: "successfully deleted todo" });
@@ -74,9 +73,7 @@ export default function Todo({
   return <>
     <Section aria-current={archived} aria-label={title}>
       <Title as={H3} text={title} onBlur={onTitleInputHandler} contentEditable suppressContentEditableWarning />
-      <P ref={paragraph} onBlur={onParagraphInputHandler} contentEditable suppressContentEditableWarning>
-        {body}
-      </P>
+      <Paragraph text={body} onBlur={onParagraphInputHandler} contentEditable suppressContentEditableWarning />
       <Small>{createdAt}</Small>
       <Button onClick={onDeleteClickHandler}>Delete</Button>
       <Button onClick={onArchiveClickHandler}>

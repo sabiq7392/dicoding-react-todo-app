@@ -34,7 +34,7 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
       };
 
       SET_TODO_DATA(TODOS_DATA.push({
-        id: new Date().toLocaleDateString("id-ID", options as any),
+        id: new Date() as unknown as string,
         title: titleValue,
         body: bodyValue,
         archived: false,

@@ -23,8 +23,12 @@ function App(): ReactElement {
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
-  // eslint-disable-next-line prefer-spread
-  console.log({ ARCHIVED_TODOS_DATA, SEARCHED_TODOS_DATA, TODOS_DATA });
+  console.log({ 
+    ARCHIVED_TODOS_DATA, 
+    SEARCHED_TODOS_DATA, 
+    TODOS_DATA, 
+    LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string) 
+  });
 
   return (
     <>

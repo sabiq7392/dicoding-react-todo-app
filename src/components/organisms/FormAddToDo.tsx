@@ -91,7 +91,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
   return <>
     <__If is={nothingToLookForTodos}>
       <Form onSubmit={onFormSubmitHandler} cssXs={cssXs.form}>
-        <Button type="submit" aria-label="add todo">
+        <Button aria-labelledby="submit todo" type="submit" aria-label="add todo">
           <AiOutlinePlus size={24} />
         </Button>
         <Div cssXs={{ display: "grid" }}>

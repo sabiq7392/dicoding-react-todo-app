@@ -95,7 +95,12 @@ export default function Todo({
     parent: {
       display: "grid",
       gap: spacing._3,
+      transition: "200ms",
       ...GenericStyles.todosCard,
+      [":hover"]: {
+        transform: "translateY(-5px)",
+        filter: "brightness(130%)"
+      }
     },
     createdAt: {
       fontSize: 10, 
@@ -138,10 +143,10 @@ export default function Todo({
         {createdAt}
       </Small>
       <Flex gap={spacing._2}>
-        <Button onClick={onDeleteClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${color.danger}` }}>
+        <Button aria-label="delete todo" onClick={onDeleteClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${color.danger}` }}>
           <CgTrashEmpty color={color.danger} size={18} />
         </Button>
-        <Button onClick={onArchiveClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${archived ? color.primary : color.warning}` }}>
+        <Button aria-label={archived ? "unarchive todo" : "archive todo"} onClick={onArchiveClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${archived ? color.primary : color.warning}` }}>
           {archived 
             ? <BiArchiveOut color={color.primary} /> 
             : <BiArchiveIn color={color.warning} size={18} />

@@ -5,7 +5,7 @@ import { Article, H1, Header, Main } from "./styles/mame-styled/core/HtmlTag";
 import TODOS_DATA from "./data/TODOS_DATA";
 import AllTodosList from "./components/templates/AllTodosList";
 import SearchedTodosList from "./components/templates/SearchedTodosList";
-import Date from "./components/atoms/Date";
+import { default as DateNow } from "./components/atoms/Date";
 import Title from "./components/atoms/Title";
 import ArchivedTodosList from "./components/templates/ArchivedTodosList";
 import FormAddTodo from "./components/organisms/FormAddTodo";
@@ -20,6 +20,7 @@ const { spacing } = STYLES_CONFIG;
 function App(): ReactElement {
   const [CHANGED_TRANSACTION, SET_CHANGED_TRANSACTION] = useState<any>();
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
+  const myDay = new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
@@ -50,7 +51,7 @@ function App(): ReactElement {
         <Article title="active todos" cssXs={cssXs.firstArticle}>
           <Header>
             <Title as={H1} text="My Day" />
-            <Date text="Friday, June 3" />
+            <DateNow text={myDay} />
           </Header>
           
           <FormAddTodo  

@@ -31,7 +31,7 @@ export default function Todo({
   const archiveTodo = (id: Id) => {
     SET_TODO_DATA(() => {
       TODOS_DATA[findIndexTodo(id)].archived = true;
-      return TODOS_DATA[findIndexTodo(id)]; // this make re render
+      return `archived: ${id}`; // this make re render
     });
 
     console.log({ message: "successfully archived todo" });
@@ -40,7 +40,7 @@ export default function Todo({
   const unarchivedTodo = (id: Id) => {
     SET_TODO_DATA(() => {
       TODOS_DATA[findIndexTodo(id)].archived = false;
-      return TODOS_DATA[findIndexTodo(id)]; // this make re render
+      return `unarchived: ${id}`; // this make re render
     });
     
     console.log({ message: "successfully unarchived todo" });

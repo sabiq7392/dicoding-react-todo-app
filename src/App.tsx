@@ -8,7 +8,7 @@ import SearchedTodosList from "./components/templates/SearchedTodosList";
 import { default as DateNow } from "./components/atoms/Date";
 import Title from "./components/atoms/Title";
 import ArchivedTodosList from "./components/templates/ArchivedTodosList";
-import FormAddTodo from "./components/organisms/FormAddTodo";
+import FormAddTodo from "./components/organisms/FormAddToDo";
 import Appbar from "./components/organisms/Appbar";
 import Footer from "./components/organisms/Footer";
 import Sidebar from "./components/organisms/Sidebar";

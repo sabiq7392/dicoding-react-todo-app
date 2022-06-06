@@ -14,7 +14,7 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
   const searchedData = (data: TodosData) => {
     return data.title.toLowerCase().includes(searchTodoInputValue);
   };
-  
+
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
       {TODOS_DATA.map(((todo, index) => 
@@ -26,8 +26,8 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
               TODOS_DATA={TODOS_DATA} 
             />
           </__RenderIf>
-          <__RenderIf is={searchedData(todo) === false && index === 1}>
-            <P>There is no todo to show</P>
+          <__RenderIf is={searchedData(todo) === false && index === 0}>
+            <P>There is no todo searched to show</P>
           </__RenderIf>
         </Fragment>
       ))}

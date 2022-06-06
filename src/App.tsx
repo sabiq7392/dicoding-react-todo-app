@@ -4,25 +4,34 @@ import GlobalsStyles from "./styles/Globals.styled";
 import { Article, Aside, Footer, H1, H2, Header, Main } from "./styles/mame-styled/core/HtmlTag";
 import STYLES_CONFIG from "./styles/styles.config";
 import TODOS_DATA from "./data/TODOS_DATA";
-import FormAddToDo from "./components/organisms/FormAddToDo";
 import AllTodosList from "./components/organisms/AllTodosList";
 import SearchedTodosList from "./components/organisms/SearchedTodosList";
 import Date from "./components/atoms/Date";
 import Title from "./components/atoms/Title";
 import SearchbarTodos from "./components/molecules/SearchbarTodos";
 import ArchivedTodosList from "./components/organisms/ArchivedTodosList";
+import FormAddTodo from "./components/organisms/FormAddTodo";
 
 const { color } = STYLES_CONFIG;
 
+/**
+ *  @todo
+ *  Give remaining character length in input title
+ *  Fix error message searched todos
+ *  Error when archive second todos
+ */
+
 function App(): ReactElement {
-  const [, SET_TODO_DATA] = useState({});
+  const [TODO_DATA, SET_TODO_DATA] = useState({});
+  const [forceReRender, setForceReRender] = useState("");
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
   console.log({ 
     TODOS_DATA, 
-    LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string) 
+    TODO_DATA,
+    LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string),
   });
 
   return (
@@ -40,7 +49,7 @@ function App(): ReactElement {
           <Title as={H1} text="My Day" />
           <Date text="Friday, June 3" />
           
-          <FormAddToDo  
+          <FormAddTodo  
             TODOS_DATA={TODOS_DATA} 
             SET_TODO_DATA={SET_TODO_DATA} 
           />

@@ -7,7 +7,7 @@ interface Props {
   ifIs: any;
 }
 
-export default function ErrorMessage({ text, ifIs }: Props): ReactElement {
+export default function InputErrorMessage({ text, ifIs }: Props): ReactElement {
   return <>
     <__RenderIf is={ifIs}>
       <Small>{text}</Small>

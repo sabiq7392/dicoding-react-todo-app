@@ -18,10 +18,10 @@ export default function Todo({
   SET_TODO_DATA, 
   TODOS_DATA,
 }: Props): ReactElement {
-  const findIndexTodo = (id: Id, data: TodosData[]) => data.findIndex(todo => todo.id === id);
+  const findIndexTodo = (id: Id) => TODOS_DATA.findIndex(todo => todo.id === id);
 
   const deleteTodo = (id: Id) => {
-    SET_TODO_DATA(TODOS_DATA.splice(findIndexTodo(id, TODOS_DATA), 1));
+    SET_TODO_DATA(TODOS_DATA.splice(findIndexTodo(id), 1));
     localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
     console.log(TODOS_DATA);
@@ -29,13 +29,19 @@ export default function Todo({
   };
 
   const archiveTodo = (id: Id) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].archived = true);
+    SET_TODO_DATA(() => {
+      TODOS_DATA[findIndexTodo(id)].archived = true;
+      return TODOS_DATA[findIndexTodo(id)]; // this make re render
+    });
 
     console.log({ message: "successfully archived todo" });
   };
 
   const unarchivedTodo = (id: Id) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].archived = false);
+    SET_TODO_DATA(() => {
+      TODOS_DATA[findIndexTodo(id)].archived = false;
+      return TODOS_DATA[findIndexTodo(id)]; // this make re render
+    });
     
     console.log({ message: "successfully unarchived todo" });
   };
@@ -52,13 +58,13 @@ export default function Todo({
   };
 
   const onTitleInputHandler = (e: FocusEvent<HTMLHeadingElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].title = (e.currentTarget.textContent as string));
-    console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id)].title = (e.currentTarget.textContent as string));
+    console.log(TODOS_DATA[findIndexTodo(id)]);
   };
 
   const onParagraphInputHandler = (e: FocusEvent<HTMLParagraphElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id, TODOS_DATA)].body = (e.currentTarget.textContent as string));
-    console.log(TODOS_DATA[findIndexTodo(id, TODOS_DATA)]);
+    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id)].body = (e.currentTarget.textContent as string));
+    console.log(TODOS_DATA[findIndexTodo(id)]);
   };
 
   return <>

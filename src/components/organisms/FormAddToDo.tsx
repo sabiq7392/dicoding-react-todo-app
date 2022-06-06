@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Form, Button, Input, Div } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
-import ErrorMessage from "../molecules/ErrorMessage";
+import InputErrorMessage from "../molecules/InputErrorMessage";
 
 interface Props {
   TODOS_DATA: TodosData[];
@@ -13,7 +13,7 @@ interface Props {
 
 const { spacing } = STYLES_CONFIG;
 
-export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): ReactElement {
+export default function FormAddTodo({ TODOS_DATA, SET_TODO_DATA }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
   const [isLengthExceed, setIsLengthExceed] = useState(false);
@@ -86,7 +86,7 @@ export default function FormAddToDo({ TODOS_DATA, SET_TODO_DATA }: Props): React
           onChange={onTitleChangeHandler}
           onKeyUp={onTitleKeyUpChangeHandler}
         />
-        <ErrorMessage ifIs={isLengthExceed} text="max length character 50" />
+        <InputErrorMessage ifIs={isLengthExceed} text="max length character 50" />
       </Div>
       <Input 
         placeholder="Todo body" 

@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { P } from "../../styles/mame-styled/core/HtmlTag";
 import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import type { SearchTodoInputValue, SetTodoData, TodosData } from "../../types";
@@ -9,7 +10,7 @@ interface Props {
   searchTodoInputValue: SearchTodoInputValue;
 }
 
-export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue }: Props) {
+export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
       {TODOS_DATA.map(((todo, index) => 
@@ -22,8 +23,8 @@ export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInpu
         </__RenderIf>
       ))}
     </__RenderIf>
-    <__RenderIf is={TODOS_DATA.length === 0}>
-      <P>There is no todos to show</P>
+    <__RenderIf is={(TODOS_DATA.length === 0 || !TODOS_DATA.find(todo => todo.archived === false)) && searchTodoInputValue === ""}>
+      <P>There is no todo list to show</P>
     </__RenderIf>
   </>;
 }

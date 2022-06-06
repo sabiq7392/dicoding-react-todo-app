@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import Todo from "../molecules/Todo";
 import type { ChangedTransaction, SearchTodoInputValue, TodosData } from "../../types";
-import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
+import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import { Article, P, H2 } from "../../styles/mame-styled/core/HtmlTag";
 import Title from "../atoms/Title";
 
@@ -9,7 +9,6 @@ interface Props {
   TODOS_DATA: TodosData[];
   SET_CHANGED_TRANSACTION: ChangedTransaction;
   searchTodoInputValue: SearchTodoInputValue;
-  
 }
 
 export default function ArchivedTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
@@ -19,26 +18,26 @@ export default function ArchivedTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA,
   const nothingToLookForTodos = searchTodoInputValue === "";
 
   return <>
-    <__RenderIf is={nothingToLookForTodos}>
+    <__If is={nothingToLookForTodos}>
       <Article aria-label="archived todos">
         <Title as={H2} text="Archived Todos" />
 
-        <__RenderIf is={archivedTodosExists}>
+        <__If is={archivedTodosExists}>
           {TODOS_DATA.map((todo) => 
-            <__RenderIf key={todo.id} is={todo.archived}>
+            <__If key={todo.id} is={todo.archived}>
               <Todo 
                 {...todo as TodosData} 
                 SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
                 TODOS_DATA={TODOS_DATA} 
               />
-            </__RenderIf>
+            </__If>
           )}
-        </__RenderIf>
+        </__If>
 
-        <__RenderIf is={noArchivedTodos}>
+        <__If is={noArchivedTodos}>
           <P>There is no todos to show</P>
-        </__RenderIf>
+        </__If>
       </Article>
-    </__RenderIf>
+    </__If>
   </>;
 }

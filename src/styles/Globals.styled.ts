@@ -25,6 +25,9 @@ const GlobalsStyles = createGlobalStyle`
   }
 
   body {
+    background: ${color.base};
+    color: white;
+    font-family: 'Poppins', sans-serif;
   }
 
   * {
@@ -34,6 +37,10 @@ const GlobalsStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
+  }
+
+  button, input {
+    border: none;
   }
 `;
 

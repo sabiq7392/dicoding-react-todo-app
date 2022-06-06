@@ -1,23 +1,28 @@
 import type { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
-import type { ChangedTransaction, TodosData } from "../../types";
+import type { ChangedTransaction, SearchTodoInputValue, TodosData } from "../../types";
 import { useState } from "react";
 import { Form, Button, Input, Div, Small } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
 import InputErrorMessage from "../molecules/InputErrorMessage";
+import { CSSProp } from "styled-components";
+import GenericStyles from "../../styles/Generic.styled";
+import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
 
 interface Props {
   TODOS_DATA: TodosData[];
   SET_CHANGED_TRANSACTION: ChangedTransaction;
+  searchTodoInputValue: SearchTodoInputValue;
 }
 
-const { spacing } = STYLES_CONFIG;
+const { spacing, color } = STYLES_CONFIG;
 
-export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Props): ReactElement {
+export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searchTodoInputValue }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
   const [lengthTitle, setLengthTitle] = useState(50);
   const [isLengthExceed, setIsLengthExceed] = useState(false);
+  const nothingToLookForTodos = searchTodoInputValue === "";
 
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,46 +62,56 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Pro
     }
   };
 
-  const onFormSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const onFormSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
     addTodo(e);
   };
 
-  const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setTitleValue(e.target.value);
     setLengthTitle(e.target.value.length);
     handleErrorInputLengthExceed(e);
   };
 
-  const onTitleKeyUpChangeHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onTitleKeyUpChangeHandler = (e: KeyboardEvent<HTMLInputElement>): void => {
     handleErrorInputLengthExceed(e);
   };
 
-  const onBodyChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onBodyChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setBodyValue(e.target.value);
   };
 
+  const cssXs: { form: CSSProp } = {
+    form: { 
+      ...GenericStyles.todosCard,
+      display: "flex", 
+      alignItems: "center", 
+    },
+  };
+
   return <>
-    <Form onSubmit={onFormSubmitHandler} cssXs={{ background: "#eee", border: "1px solid red", display: "flex", alignItems: "center", padding: spacing._3 }}>
-      <Button type="submit" aria-label="add todo">
-        <AiOutlinePlus size={24} />
-      </Button>
-      <Div cssXs={{ display: "grid" }}>
-        <Small>Sisa Karakter: {lengthTitle}</Small>
+    <__If is={nothingToLookForTodos}>
+      <Form onSubmit={onFormSubmitHandler} cssXs={cssXs.form}>
+        <Button type="submit" aria-label="add todo">
+          <AiOutlinePlus size={24} />
+        </Button>
+        <Div cssXs={{ display: "grid" }}>
+          <Small>Remaining: {lengthTitle}</Small>
+          <Input 
+            required 
+            placeholder="Todo title" 
+            type="text" 
+            onChange={onTitleChangeHandler}
+            onKeyUp={onTitleKeyUpChangeHandler}
+          />
+          <InputErrorMessage ifIs={isLengthExceed} text="max length character 50" />
+        </Div>
         <Input 
-          required 
-          placeholder="Todo title" 
+          placeholder="Todo body" 
           type="text" 
-          onChange={onTitleChangeHandler}
-          onKeyUp={onTitleKeyUpChangeHandler}
+          onChange={onBodyChangeHandler} 
         />
-        <InputErrorMessage ifIs={isLengthExceed} text="max length character 50" />
-      </Div>
-      <Input 
-        placeholder="Todo body" 
-        type="text" 
-        onChange={onBodyChangeHandler} 
-      />
-    </Form>
+      </Form>
+    </__If>
   </>;
 }
 

@@ -1,15 +1,19 @@
 const STYLES_CONFIG = {
   color: {
-    base: "#FAFCFF",
-    primary: "#00B4D8",
-    muted: "#A3A3B3",
-    warning: "#BED641",
+    base: "#181818",
+    dark:  "#232323",
+    primary: "#0078D7",
+    muted: "#2E4A45",
+    low: "#50BB9B",
+    warning: "#F3B433",
+    danger: "#D34D3F",
   },
   spacing: {
     _1: "0.25rem",
     _2: "0.5rem",
     _3: "0.75rem",
     _4: "1rem",
+    
     _5: "1.25rem",
     _6: "1.5rem",
     _7: "1.75rem",

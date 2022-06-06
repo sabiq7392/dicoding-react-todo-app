@@ -1,6 +1,6 @@
 import { Fragment, ReactElement } from "react";
 import type { SearchTodoInputValue, ChangedTransaction, TodosData } from "../../types";
-import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
+import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import Todo from "../molecules/Todo";
 import { Article, H2, P } from "../../styles/mame-styled/core/HtmlTag";
 import Title from "../atoms/Title";
@@ -22,26 +22,26 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
   const todosDataExists = TODOS_DATA.length > 0;
 
   return <> 
-    <__RenderIf is={lookingForTodos}>
+    <__If is={lookingForTodos}>
       <Article aria-label="searched todos">
         <Title as={H2} text="Searched Todos" />
 
-        <__RenderIf is={todosDataExists}>
+        <__If is={todosDataExists}>
           {TODOS_DATA.map(((todo) => 
-            <__RenderIf is={searchedTodos(todo)} key={todo.id}>
+            <__If is={searchedTodos(todo)} key={todo.id}>
               <Todo 
                 {...todo as TodosData} 
                 SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
                 TODOS_DATA={TODOS_DATA} 
               />
-            </__RenderIf>
+            </__If>
           ))}
-        </__RenderIf>
+        </__If>
 
-        <__RenderIf is={noSearchedTodos}>
+        <__If is={noSearchedTodos}>
           <P>There is no todo searched to show</P>
-        </__RenderIf>
+        </__If>
       </Article>
-    </__RenderIf>
+    </__If>
   </>;
 }

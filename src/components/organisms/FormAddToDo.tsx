@@ -1,7 +1,7 @@
 import { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
 import type { ChangedTransaction, TodosData } from "../../types";
 import { useState } from "react";
-import { Form, Button, Input, Div } from "../../styles/mame-styled/core/HtmlTag";
+import { Form, Button, Input, Div, Small } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
 import InputErrorMessage from "../molecules/InputErrorMessage";
@@ -16,6 +16,7 @@ const { spacing } = STYLES_CONFIG;
 export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
+  const [lengthTitle, setLengthTitle] = useState(0);
   const [isLengthExceed, setIsLengthExceed] = useState(false);
 
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
@@ -62,6 +63,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Pro
 
   const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleValue(e.target.value);
+    setLengthTitle(e.target.value.length);
     handleErrorInputLengthExceed(e);
   };
 
@@ -79,6 +81,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Pro
         <AiOutlinePlus size={24} />
       </Button>
       <Div cssXs={{ display: "grid" }}>
+        <Small>Sisa Karakter: {lengthTitle}</Small>
         <Input 
           required 
           placeholder="Todo title" 

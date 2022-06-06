@@ -1,6 +1,6 @@
 import type { TodosData } from "../types";
 
-export const NO_INITIAL_DICODING_DATA = false;  // SET TRUE TO USE REAL CASE
+export const NO_INITIAL_DICODING_DATA = true;  // SET TRUE TO USE REAL CASE
 
 const LOCAL_STORAGE_DATA = (
   localStorage.getItem("todos_data") ? JSON.parse(localStorage.getItem("todos_data") as string) : []

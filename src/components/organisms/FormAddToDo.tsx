@@ -1,7 +1,7 @@
 import type { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
 import type { ChangedTransaction, SearchTodoInputValue, TodosData } from "../../types";
 import { useState } from "react";
-import { Form, Button, Input, Div, Small, Textarea } from "../../styles/mame-styled/core/HtmlTag";
+import { Form, Button, Input, Small, Textarea } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
 import MessageErrorInput from "../atoms/MessageInputError";

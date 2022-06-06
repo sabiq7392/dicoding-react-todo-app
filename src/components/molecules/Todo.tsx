@@ -2,7 +2,7 @@ import type { ReactElement, FocusEvent, MouseEvent } from "react";
 import { CSSProp, CSSProperties } from "styled-components";
 import GenericStyles from "../../styles/Generic.styled";
 import { Flex } from "../../styles/mame-styled/core/display/Flex";
-import { Section, Small, Button, H3, Div } from "../../styles/mame-styled/core/HtmlTag";
+import { Section, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
 import STYLES_CONFIG from "../../styles/styles.config";
 import type { Id, ChangedTransaction, TodosData } from "../../types";
 import Paragraph from "../atoms/Paragraph";

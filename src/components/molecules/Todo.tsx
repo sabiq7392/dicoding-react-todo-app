@@ -8,7 +8,8 @@ import type { Id, ChangedTransaction, TodosData } from "../../types";
 import Paragraph from "../atoms/Paragraph";
 import Title from "../atoms/Title";
 import { CgTrashEmpty } from "react-icons/cg";
-import { BiArchiveIn } from "react-icons/bi";
+import { BiArchiveIn, BiArchiveOut } from "react-icons/bi";
+import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
 
 interface Props extends TodosData {
   SET_CHANGED_TRANSACTION: ChangedTransaction;
@@ -104,7 +105,8 @@ export default function Todo({
     button: {
       display: "grid",
       placeItems: "center",
-      padding: spacing._2,
+      height: 44,
+      width: 44,
       background: "none",
       borderRadius: 4,
       transition: "200ms",
@@ -124,12 +126,14 @@ export default function Todo({
         onDoubleClick={onTitleDoubleClickHandler} 
         suppressContentEditableWarning 
       />
-      <Paragraph 
-        text={body} 
-        onBlur={onParagraphBlurHandler} 
-        onDoubleClick={onParagraphDoubleClickHandler} 
-        suppressContentEditableWarning 
-      />
+      <__If is={body !== ""}>
+        <Paragraph 
+          text={body} 
+          onBlur={onParagraphBlurHandler} 
+          onDoubleClick={onParagraphDoubleClickHandler} 
+          suppressContentEditableWarning 
+        />
+      </__If>
       <Small cssXs={cssXs.createdAt}>
         {createdAt}
       </Small>
@@ -137,9 +141,11 @@ export default function Todo({
         <Button onClick={onDeleteClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${color.danger}` }}>
           <CgTrashEmpty color={color.danger} size={18} />
         </Button>
-        <Button onClick={onArchiveClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${color.warning}` }}>
-          {/* {archived === false ? "Archived" : "Unarchived"} */}
-          <BiArchiveIn color={color.warning} size={18} />
+        <Button onClick={onArchiveClickHandler} cssXs={{ ...cssXs.button as object, border: `1px solid ${archived ? color.primary : color.warning}` }}>
+          {archived 
+            ? <BiArchiveOut color={color.primary} /> 
+            : <BiArchiveIn color={color.warning} size={18} />
+          }
         </Button>
       </Flex>
     </Section>

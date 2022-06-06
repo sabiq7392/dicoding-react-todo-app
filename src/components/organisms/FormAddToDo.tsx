@@ -1,13 +1,14 @@
 import type { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
 import type { ChangedTransaction, SearchTodoInputValue, TodosData } from "../../types";
 import { useState } from "react";
-import { Form, Button, Input, Div, Small } from "../../styles/mame-styled/core/HtmlTag";
+import { Form, Button, Input, Div, Small, Textarea } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
 import MessageErrorInput from "../atoms/MessageInputError";
 import { CSSProp } from "styled-components";
 import GenericStyles from "../../styles/Generic.styled";
 import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
+import { Grid } from "../../styles/mame-styled/core/display/Grid";
 
 interface Props {
   TODOS_DATA: TodosData[];
@@ -18,9 +19,10 @@ interface Props {
 const { spacing, color } = STYLES_CONFIG;
 
 export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searchTodoInputValue }: Props): ReactElement {
+  const [maxLengthTitle,] = useState(50); 
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
-  const [lengthTitle, setLengthTitle] = useState(50);
+  const [lengthTitle, setLengthTitle] = useState(maxLengthTitle);
   const [isLengthExceed, setIsLengthExceed] = useState(false);
   const nothingToLookForTodos = searchTodoInputValue === "";
 
@@ -76,7 +78,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
     handleErrorInputLengthExceed(e);
   };
 
-  const onBodyChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+  const onBodyChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setBodyValue(e.target.value);
   };
 
@@ -95,13 +97,24 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
       gap: spacing._3,
     },
     button: {
-      
+      ...GenericStyles.commonButtons,
+      transform: `translateY(${spacing._6})`,
+      display: "grid",
+      alignSelf: "start",
+      placeItems: "center",
+      background: color.primary,
+      ["svg"]: {
+        fill: "white",
+      },
     },
     title: {
-
+      ...GenericStyles.commonInput,
+      height: 44,
+      width: "100%",
     },
     body: {
-
+      ...GenericStyles.commonInput,
+      height: 44,
     }
   };
 
@@ -111,22 +124,25 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
         <Button aria-labelledby="submit todo" type="submit" aria-label="add todo" cssXs={cssXs.button}>
           <AiOutlinePlus size={24} />
         </Button>
-        <Div cssXs={{ display: "grid" }}>
-          <Small>Remaining: {lengthTitle}</Small>
-          <Input 
-            required 
-            placeholder="Todo title" 
-            type="text" 
-            onChange={onTitleChangeHandler}
-            onKeyUp={onTitleKeyUpChangeHandler}
+        <Grid gap={spacing._2} cssXs={{ width: "100%" }}>
+          <Grid gap={spacing._1}>
+            <Small cssXs={{ justifySelf: "end" }}>Remaining: {lengthTitle}</Small>
+            <Input 
+              required 
+              placeholder="Todo title" 
+              type="text" 
+              onChange={onTitleChangeHandler}
+              onKeyUp={onTitleKeyUpChangeHandler}
+              cssXs={cssXs.title}
+            />
+            <MessageErrorInput ifIs={isLengthExceed} text={`max length character: ${maxLengthTitle}`} />
+          </Grid>
+          <Textarea
+            placeholder="Todo body" 
+            onChange={onBodyChangeHandler}
+            cssXs={cssXs.body} 
           />
-          <MessageErrorInput ifIs={isLengthExceed} text="max length character 50" />
-        </Div>
-        <Input 
-          placeholder="Todo body" 
-          type="text" 
-          onChange={onBodyChangeHandler} 
-        />
+        </Grid>
       </Form>
     </__If>
   </>;

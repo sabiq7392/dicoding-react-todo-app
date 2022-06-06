@@ -108,14 +108,11 @@ export default function Todo({
       display: "block",
     },
     button: {
+      ...GenericStyles.commonButtons,
       display: "grid",
       placeItems: "center",
-      height: 44,
-      width: 44,
       background: "none",
-      borderRadius: 4,
       transition: "200ms",
-      cursor: "pointer",
       [":hover"]: {
         background: "#111",
       },

@@ -11,16 +11,19 @@ interface Props {
 }
 
 export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SET_CHANGED_TRANSACTION }: Props): ReactElement {
-  const searchedData = (data: TodosData) => {
+  const searchedTodos = (data: TodosData) => {
     return data.title.toLowerCase().includes(searchTodoInputValue);
   };
   
-  const listSearchedData = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchTodoInputValue) && todo.archived === false);
-
-  return <>
-    <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
+  const getAllSearchedTodos = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchTodoInputValue) && todo.archived === false);
+  const lookingForTodos = searchTodoInputValue !== "";
+  const noSearchedTodos = getAllSearchedTodos.length === 0;
+  const todosDataExists = TODOS_DATA.length > 0;
+  
+  return <> 
+    <__RenderIf is={todosDataExists && lookingForTodos}>
       {TODOS_DATA.map(((todo) => 
-        <__RenderIf is={todo.archived === false && searchedData(todo)} key={todo.id}>
+        <__RenderIf is={todo.archived === false && searchedTodos(todo)} key={todo.id}>
           <Todo 
             {...todo as TodosData} 
             SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
@@ -29,7 +32,7 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
         </__RenderIf>
       ))}
     </__RenderIf>
-    <__RenderIf is={listSearchedData.length === 0 && searchTodoInputValue !== ""}>
+    <__RenderIf is={noSearchedTodos && lookingForTodos}>
       <P>There is no todo searched to show</P>
     </__RenderIf>
   </>;

@@ -11,8 +11,14 @@ interface Props {
 }
 
 export default function AllTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
+  const getAllActiveTodos = TODOS_DATA.filter(todo => todo.archived === false);
+  const noActiveTodosExists = getAllActiveTodos.length === 0;
+  const todosDataExists = TODOS_DATA.length > 0;
+  const noTodosData = TODOS_DATA.length === 0;
+  const nothingToLookForTodos = searchTodoInputValue === "";
+
   return <>
-    <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
+    <__RenderIf is={todosDataExists && nothingToLookForTodos}>
       {TODOS_DATA.map(((todo) => 
         <__RenderIf is={todo.archived === false} key={todo.id}>
           <Todo 
@@ -23,7 +29,7 @@ export default function AllTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA, sear
         </__RenderIf>
       ))}
     </__RenderIf>
-    <__RenderIf is={(TODOS_DATA.length === 0 || !TODOS_DATA.find(todo => todo.archived === false)) && searchTodoInputValue === ""}>
+    <__RenderIf is={(noTodosData || noActiveTodosExists) && nothingToLookForTodos}>
       <P>There is no todo list to show</P>
     </__RenderIf>
   </>;

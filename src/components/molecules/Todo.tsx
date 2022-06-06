@@ -19,7 +19,6 @@ export default function Todo({
   TODOS_DATA,
 }: Props): ReactElement {
   const findIndexTodo = (id: Id) => TODOS_DATA.findIndex(todo => todo.id === id);
-
   const deleteTodo = (id: Id) => {
     SET_CHANGED_TRANSACTION(TODOS_DATA.splice(findIndexTodo(id), 1));
     localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));

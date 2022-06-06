@@ -13,8 +13,8 @@ interface Props {
 export default function AllTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
-      {TODOS_DATA.map(((todo, index) => 
-        <__RenderIf is={todo.archived === false} key={index}>
+      {TODOS_DATA.map(((todo) => 
+        <__RenderIf is={todo.archived === false} key={todo.id}>
           <Todo 
             {...todo as TodosData} 
             SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}

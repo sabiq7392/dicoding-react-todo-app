@@ -15,23 +15,21 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
     return data.title.toLowerCase().includes(searchTodoInputValue);
   };
   
-  const listSearchedData = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchTodoInputValue));
+  const listSearchedData = TODOS_DATA.filter(todo => todo.title.toLowerCase().includes(searchTodoInputValue) && todo.archived === false);
 
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue !== ""}>
-      {TODOS_DATA.map(((todo, index) => 
-        <Fragment key={index}>
-          <__RenderIf is={todo.archived === false && searchedData(todo)}>
-            <Todo 
-              {...todo as TodosData} 
-              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
-              TODOS_DATA={TODOS_DATA} 
-            />
-          </__RenderIf>
-        </Fragment>
+      {TODOS_DATA.map(((todo) => 
+        <__RenderIf is={todo.archived === false && searchedData(todo)} key={todo.id}>
+          <Todo 
+            {...todo as TodosData} 
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
+            TODOS_DATA={TODOS_DATA} 
+          />
+        </__RenderIf>
       ))}
     </__RenderIf>
-    <__RenderIf is={listSearchedData.length === 0}>
+    <__RenderIf is={listSearchedData.length === 0 && searchTodoInputValue !== ""}>
       <P>There is no todo searched to show</P>
     </__RenderIf>
   </>;

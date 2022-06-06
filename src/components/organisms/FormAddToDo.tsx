@@ -1,4 +1,4 @@
-import { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
+import type { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
 import type { ChangedTransaction, TodosData } from "../../types";
 import { useState } from "react";
 import { Form, Button, Input, Div, Small } from "../../styles/mame-styled/core/HtmlTag";
@@ -16,7 +16,7 @@ const { spacing } = STYLES_CONFIG;
 export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
-  const [lengthTitle, setLengthTitle] = useState(0);
+  const [lengthTitle, setLengthTitle] = useState(50);
   const [isLengthExceed, setIsLengthExceed] = useState(false);
 
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
@@ -99,5 +99,4 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Pro
     </Form>
   </>;
 }
-
 

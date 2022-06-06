@@ -1,22 +1,20 @@
-import type { ReactElement } from "react";
+import type { ReactElement,  } from "react";
 import { useState } from "react";
 import GlobalsStyles from "./styles/Globals.styled";
-import { Article, Aside, Footer, H1, H2, Header, Main } from "./styles/mame-styled/core/HtmlTag";
-import STYLES_CONFIG from "./styles/styles.config";
+import { Article, H1, H2, Main } from "./styles/mame-styled/core/HtmlTag";
 import TODOS_DATA from "./data/TODOS_DATA";
-import AllTodosList from "./components/organisms/AllTodosList";
-import SearchedTodosList from "./components/organisms/SearchedTodosList";
+import AllTodosList from "./components/templates/AllTodosList";
+import SearchedTodosList from "./components/templates/SearchedTodosList";
 import Date from "./components/atoms/Date";
 import Title from "./components/atoms/Title";
-import SearchbarTodos from "./components/molecules/SearchbarTodos";
-import ArchivedTodosList from "./components/organisms/ArchivedTodosList";
+import ArchivedTodosList from "./components/templates/ArchivedTodosList";
 import FormAddTodo from "./components/organisms/FormAddTodo";
-
-const { color } = STYLES_CONFIG;
+import Appbar from "./components/organisms/Appbar";
+import Footer from "./components/organisms/Footer";
+import Sidebar from "./components/organisms/Sidebar";
 
 /**
  *  @todo
- *  Fix error message searched todos
  */
 
 function App(): ReactElement {
@@ -34,13 +32,9 @@ function App(): ReactElement {
   return (
     <>
       <GlobalsStyles />
-      <Header cssXs={{ background: color.primary, height: 40 }}>
-        {/* logo - brand */}
-        <SearchbarTodos setSearchTodoInputValue={setSearchTodoInputValue} />
-      </Header>
-      <Aside>
-        {/* optional */}
-      </Aside>
+      <Appbar setSearchTodoInputValue={setSearchTodoInputValue} />
+      <Sidebar />
+      
       <Main>
         <Article title="active todos">
           <Title as={H1} text="My Day" />
@@ -81,11 +75,8 @@ function App(): ReactElement {
           </Article>
         </Article>
       </Main>
-      <Footer>
-        {/* logo - brand */}
-        {/* author */}
-        {/* contact author */}
-      </Footer>
+
+      <Footer />
     </>
   );
 }

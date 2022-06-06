@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Form, Button, Input, Div, Small } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
 import STYLES_CONFIG from "../../styles/styles.config";
-import InputErrorMessage from "../molecules/InputErrorMessage";
+import MessageErrorInput from "../atoms/MessageInputError";
 import { CSSProp } from "styled-components";
 import GenericStyles from "../../styles/Generic.styled";
 import { default as __If } from "../../styles/mame-styled/core/utils/js-syntax/If";
@@ -68,7 +68,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
 
   const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setTitleValue(e.target.value);
-    setLengthTitle(e.target.value.length);
+    setLengthTitle(e.target.value.length <= 50 ? 50 - e.target.value.length : 0);
     handleErrorInputLengthExceed(e);
   };
 
@@ -80,18 +80,35 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
     setBodyValue(e.target.value);
   };
 
-  const cssXs: { form: CSSProp } = {
+  interface CssXs {
+    form: CSSProp;
+    button: CSSProp;
+    title: CSSProp;
+    body: CSSProp;
+  }
+
+  const cssXs: CssXs = {
     form: { 
       ...GenericStyles.todosCard,
       display: "flex", 
       alignItems: "center", 
+      gap: spacing._3,
     },
+    button: {
+      
+    },
+    title: {
+
+    },
+    body: {
+
+    }
   };
 
   return <>
     <__If is={nothingToLookForTodos}>
       <Form onSubmit={onFormSubmitHandler} cssXs={cssXs.form}>
-        <Button aria-labelledby="submit todo" type="submit" aria-label="add todo">
+        <Button aria-labelledby="submit todo" type="submit" aria-label="add todo" cssXs={cssXs.button}>
           <AiOutlinePlus size={24} />
         </Button>
         <Div cssXs={{ display: "grid" }}>
@@ -103,7 +120,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION, searc
             onChange={onTitleChangeHandler}
             onKeyUp={onTitleKeyUpChangeHandler}
           />
-          <InputErrorMessage ifIs={isLengthExceed} text="max length character 50" />
+          <MessageErrorInput ifIs={isLengthExceed} text="max length character 50" />
         </Div>
         <Input 
           placeholder="Todo body" 

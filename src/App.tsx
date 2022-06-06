@@ -16,7 +16,6 @@ const { color } = STYLES_CONFIG;
 
 /**
  *  @todo
- *  Give remaining character length in input title
  *  Fix error message searched todos
  */
 

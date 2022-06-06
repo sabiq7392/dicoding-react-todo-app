@@ -1,23 +1,23 @@
 import type { ReactElement } from "react";
 import { P } from "../../styles/mame-styled/core/HtmlTag";
 import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
-import type { SearchTodoInputValue, SetTodoData, TodosData } from "../../types";
+import type { SearchTodoInputValue, ChangedTransaction, TodosData } from "../../types";
 import Todo from "../molecules/Todo";
 
 interface Props {
   TODOS_DATA: TodosData[];
-  SET_TODO_DATA: SetTodoData;
+  SET_CHANGED_TRANSACTION: ChangedTransaction;
   searchTodoInputValue: SearchTodoInputValue;
 }
 
-export default function AllTodosList({ SET_TODO_DATA, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
+export default function AllTodosList({ SET_CHANGED_TRANSACTION, TODOS_DATA, searchTodoInputValue }: Props): ReactElement {
   return <>
     <__RenderIf is={TODOS_DATA.length > 0 && searchTodoInputValue === ""}>
       {TODOS_DATA.map(((todo, index) => 
         <__RenderIf is={todo.archived === false} key={index}>
           <Todo 
             {...todo as TodosData} 
-            SET_TODO_DATA={SET_TODO_DATA}
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
             TODOS_DATA={TODOS_DATA} 
           />
         </__RenderIf>

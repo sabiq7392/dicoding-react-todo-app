@@ -22,15 +22,14 @@ const { color } = STYLES_CONFIG;
  */
 
 function App(): ReactElement {
-  const [TODO_DATA, SET_TODO_DATA] = useState({});
-  const [forceReRender, setForceReRender] = useState("");
+  const [CHANGED_TRANSACTION, SET_CHANGED_TRANSACTION] = useState<any>();
   const [searchTodoInputValue, setSearchTodoInputValue] = useState("");
 
   localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
   console.log({ 
     TODOS_DATA, 
-    TODO_DATA,
+    CHANGED_TRANSACTION,
     LOCAL_STORAGE_TODOS_DATA: JSON.parse(localStorage.getItem("todos_data") as string),
   });
 
@@ -51,7 +50,7 @@ function App(): ReactElement {
           
           <FormAddTodo  
             TODOS_DATA={TODOS_DATA} 
-            SET_TODO_DATA={SET_TODO_DATA} 
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION} 
           />
 
           <Article title="active todos">
@@ -62,13 +61,13 @@ function App(): ReactElement {
             <AllTodosList 
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
-              SET_TODO_DATA={SET_TODO_DATA}
+              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
             />
 
             <SearchedTodosList 
               searchTodoInputValue={searchTodoInputValue} 
               TODOS_DATA={TODOS_DATA} 
-              SET_TODO_DATA={SET_TODO_DATA} 
+              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION} 
             />
           </Article>
 
@@ -79,7 +78,7 @@ function App(): ReactElement {
 
             <ArchivedTodosList 
               TODOS_DATA={TODOS_DATA}
-              SET_TODO_DATA={SET_TODO_DATA}
+              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
             />
           </Article>
         </Article>

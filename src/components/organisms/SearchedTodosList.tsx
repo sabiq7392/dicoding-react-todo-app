@@ -1,16 +1,16 @@
 import { Fragment, ReactElement } from "react";
-import type { SearchTodoInputValue, SetTodoData, TodosData } from "../../types";
+import type { SearchTodoInputValue, ChangedTransaction, TodosData } from "../../types";
 import { default as __RenderIf } from "../../styles/mame-styled/core/utils/js-syntax/If";
 import Todo from "../molecules/Todo";
 import { P } from "../../styles/mame-styled/core/HtmlTag";
 
 interface Props {
   TODOS_DATA: TodosData[];
-  SET_TODO_DATA: SetTodoData;
+  SET_CHANGED_TRANSACTION: ChangedTransaction;
   searchTodoInputValue: SearchTodoInputValue;
 }
 
-export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SET_TODO_DATA }: Props): ReactElement {
+export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SET_CHANGED_TRANSACTION }: Props): ReactElement {
   const searchedData = (data: TodosData) => {
     return data.title.toLowerCase().includes(searchTodoInputValue);
   };
@@ -22,7 +22,7 @@ export default function SearchedTodosList({ TODOS_DATA, searchTodoInputValue, SE
           <__RenderIf is={todo.archived === false && searchedData(todo)}>
             <Todo 
               {...todo as TodosData} 
-              SET_TODO_DATA={SET_TODO_DATA}
+              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
               TODOS_DATA={TODOS_DATA} 
             />
           </__RenderIf>

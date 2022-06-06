@@ -1,5 +1,5 @@
 import { ReactElement, FormEvent, KeyboardEvent, ChangeEvent } from "react";
-import type { SetTodoData, TodosData } from "../../types";
+import type { ChangedTransaction, TodosData } from "../../types";
 import { useState } from "react";
 import { Form, Button, Input, Div } from "../../styles/mame-styled/core/HtmlTag";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -8,12 +8,12 @@ import InputErrorMessage from "../molecules/InputErrorMessage";
 
 interface Props {
   TODOS_DATA: TodosData[];
-  SET_TODO_DATA: SetTodoData;
+  SET_CHANGED_TRANSACTION: ChangedTransaction;
 }
 
 const { spacing } = STYLES_CONFIG;
 
-export default function FormAddTodo({ TODOS_DATA, SET_TODO_DATA }: Props): ReactElement {
+export default function FormAddTodo({ TODOS_DATA, SET_CHANGED_TRANSACTION }: Props): ReactElement {
   const [titleValue, setTitleValue] = useState("");
   const [bodyValue, setBodyValue] = useState("");
   const [isLengthExceed, setIsLengthExceed] = useState(false);
@@ -33,7 +33,7 @@ export default function FormAddTodo({ TODOS_DATA, SET_TODO_DATA }: Props): React
         day: "numeric"
       };
 
-      SET_TODO_DATA(TODOS_DATA.push({
+      SET_CHANGED_TRANSACTION(TODOS_DATA.push({
         id: new Date() as unknown as string,
         title: titleValue,
         body: bodyValue,

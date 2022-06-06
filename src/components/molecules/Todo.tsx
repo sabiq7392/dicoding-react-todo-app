@@ -1,11 +1,11 @@
 import type { ReactElement, FocusEvent } from "react";
 import { Section, Small, Button, H3 } from "../../styles/mame-styled/core/HtmlTag";
-import type { Id, SetTodoData, TodosData } from "../../types";
+import type { Id, ChangedTransaction, TodosData } from "../../types";
 import Paragraph from "../atoms/Paragraph";
 import Title from "../atoms/Title";
 
 interface Props extends TodosData {
-  SET_TODO_DATA: SetTodoData;
+  SET_CHANGED_TRANSACTION: ChangedTransaction;
   TODOS_DATA: TodosData[];
 }
 
@@ -15,13 +15,13 @@ export default function Todo({
   body, 
   createdAt, 
   archived, 
-  SET_TODO_DATA, 
+  SET_CHANGED_TRANSACTION, 
   TODOS_DATA,
 }: Props): ReactElement {
   const findIndexTodo = (id: Id) => TODOS_DATA.findIndex(todo => todo.id === id);
 
   const deleteTodo = (id: Id) => {
-    SET_TODO_DATA(TODOS_DATA.splice(findIndexTodo(id), 1));
+    SET_CHANGED_TRANSACTION(TODOS_DATA.splice(findIndexTodo(id), 1));
     localStorage.setItem("todos_data", JSON.stringify(TODOS_DATA));
 
     console.log(TODOS_DATA);
@@ -29,7 +29,7 @@ export default function Todo({
   };
 
   const archiveTodo = (id: Id) => {
-    SET_TODO_DATA(() => {
+    SET_CHANGED_TRANSACTION(() => {
       TODOS_DATA[findIndexTodo(id)].archived = true;
       return `archived: ${id}`; // this make re render
     });
@@ -38,7 +38,7 @@ export default function Todo({
   };
 
   const unarchivedTodo = (id: Id) => {
-    SET_TODO_DATA(() => {
+    SET_CHANGED_TRANSACTION(() => {
       TODOS_DATA[findIndexTodo(id)].archived = false;
       return `unarchived: ${id}`; // this make re render
     });
@@ -58,12 +58,12 @@ export default function Todo({
   };
 
   const onTitleInputHandler = (e: FocusEvent<HTMLHeadingElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id)].title = (e.currentTarget.textContent as string));
+    SET_CHANGED_TRANSACTION(TODOS_DATA[findIndexTodo(id)].title = (e.currentTarget.textContent as string));
     console.log(TODOS_DATA[findIndexTodo(id)]);
   };
 
   const onParagraphInputHandler = (e: FocusEvent<HTMLParagraphElement>) => {
-    SET_TODO_DATA(TODOS_DATA[findIndexTodo(id)].body = (e.currentTarget.textContent as string));
+    SET_CHANGED_TRANSACTION(TODOS_DATA[findIndexTodo(id)].body = (e.currentTarget.textContent as string));
     console.log(TODOS_DATA[findIndexTodo(id)]);
   };
 

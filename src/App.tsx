@@ -45,34 +45,29 @@ function App(): ReactElement {
             SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION} 
           />
 
-          <Article title="active todos">
-            <Title as={H2} text="Active Todos" />
+          <br />
 
-            <br />
-
-            <AllTodosList 
-              searchTodoInputValue={searchTodoInputValue} 
-              TODOS_DATA={TODOS_DATA} 
-              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
-            />
-
-            <SearchedTodosList 
-              searchTodoInputValue={searchTodoInputValue} 
-              TODOS_DATA={TODOS_DATA} 
-              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION} 
-            />
-          </Article>
+          <AllTodosList 
+            searchTodoInputValue={searchTodoInputValue} 
+            TODOS_DATA={TODOS_DATA} 
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
+          />
 
           <br />
 
-          <Article title="archived todos">
-            <Title as={H2} text="Archived Todos" />
+          <SearchedTodosList 
+            searchTodoInputValue={searchTodoInputValue} 
+            TODOS_DATA={TODOS_DATA} 
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION} 
+          />
 
-            <ArchivedTodosList 
-              TODOS_DATA={TODOS_DATA}
-              SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
-            />
-          </Article>
+          <br />
+
+          <ArchivedTodosList 
+            TODOS_DATA={TODOS_DATA}
+            SET_CHANGED_TRANSACTION={SET_CHANGED_TRANSACTION}
+            searchTodoInputValue={searchTodoInputValue} 
+          />
         </Article>
       </Main>
 

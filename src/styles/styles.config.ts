@@ -6,7 +6,7 @@ const STYLES_CONFIG = {
     warning: "#BED641",
   },
   spacing: {
-    _1: '0.25rem',
+    _1: "0.25rem",
     _2: "0.5rem",
     _3: "0.75rem",
     _4: "1rem",
